@@ -26,3 +26,28 @@ export type FiscalDataset = {
   };
   prefectures: PrefectureFiscal[];
 };
+
+export type PrefectureIndustry = {
+  code: string;
+  name: string;
+  /** 単位: 100万円 */
+  gdpBySector: Record<string, number>;
+  gdpTotal: number;
+  primary: number;
+  secondary: number;
+  tertiary: number;
+};
+
+export type IndustryDataset = {
+  meta: {
+    fiscalYear: string;
+    source: string;
+    sourceUrl: string;
+    license: string;
+    fetchedAt: string;
+  };
+  sectors: string[];
+  /** キーは年度の西暦（"2022" など）。最新年度が `latestYear` */
+  latestYear: string;
+  years: Record<string, PrefectureIndustry[]>;
+};

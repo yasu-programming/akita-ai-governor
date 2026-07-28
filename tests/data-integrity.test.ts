@@ -1,8 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import fiscal from '../src/data/fiscal.json';
-import type { FiscalDataset } from '../src/lib/types';
+import industry from '../src/data/industry.json';
+import type { FiscalDataset, IndustryDataset } from '../src/lib/types';
 
 const data = fiscal as FiscalDataset;
+const ind = industry as IndustryDataset;
 
 describe('fiscal.json', () => {
   it('covers all 47 prefectures with unique sequential codes', () => {
@@ -48,5 +50,47 @@ describe('fiscal.json', () => {
     expect(data.meta.source).toContain('総務省');
     expect(data.meta.license).toContain('政府標準利用規約');
     expect(data.meta.sourceUrl).toMatch(/^https:\/\/www\.soumu\.go\.jp\//);
+  });
+});
+
+describe('industry.json', () => {
+  it('exposes 2022 as the latest year', () => {
+    expect(ind.latestYear).toBe('2022');
+    expect(Object.keys(ind.years)).toContain('2011');
+    expect(Object.keys(ind.years)).toContain('2022');
+  });
+
+  it('covers all 47 prefectures in every year', () => {
+    for (const [year, list] of Object.entries(ind.years)) {
+      expect(list, year).toHaveLength(47);
+    }
+  });
+
+  it('lists 16 sectors', () => {
+    expect(ind.sectors).toHaveLength(16);
+    expect(ind.sectors).toContain('農林水産業');
+    expect(ind.sectors).toContain('製造業');
+    expect(ind.sectors).toContain('保健衛生・社会事業');
+  });
+
+  it('records Akita 2022 with a plausible gross product', () => {
+    const akita = ind.years['2022'].find((p) => p.code === '05');
+    expect(akita?.name).toBe('秋田県');
+    // 単位は100万円。秋田県の県内総生産はおよそ3.6兆円
+    expect(akita!.gdpTotal).toBeGreaterThan(3_000_000);
+    expect(akita!.gdpTotal).toBeLessThan(4_500_000);
+  });
+
+  it('has primary + secondary + tertiary close to the sector subtotal', () => {
+    for (const p of ind.years['2022']) {
+      const three = p.primary + p.secondary + p.tertiary;
+      const sectors = Object.values(p.gdpBySector).reduce((a, b) => a + b, 0);
+      expect(Math.abs(three - sectors) / sectors, p.name).toBeLessThan(0.02);
+    }
+  });
+
+  it('cites its source and license', () => {
+    expect(ind.meta.source).toContain('県民経済計算');
+    expect(ind.meta.license).toContain('政府標準利用規約');
   });
 });
