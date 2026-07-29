@@ -51,3 +51,25 @@ export type IndustryDataset = {
   latestYear: string;
   years: Record<string, PrefectureIndustry[]>;
 };
+
+export type AxisKey = 'population' | 'economy' | 'fiscal' | 'quality' | 'durability';
+
+export type Weights = Record<AxisKey, number>;
+
+export type Policy = {
+  id: string;
+  name: string;
+  summary: string;
+  /** 年あたりの想定コスト（億円）。本モデルの仮定値 */
+  costOku: number;
+  /** 対応する目的別歳出区分。fiscal.json の expenseByPurpose のキーと一致させる */
+  expenseCategory: string;
+  /** -10〜+10。本モデルの仮定値 */
+  scores: Record<AxisKey, number>;
+  rationale: string;
+  sideEffects: string[];
+  evidence: { label: string; url: string }[];
+  /** 同じ値を持つカードは同時に採択されない */
+  exclusiveGroup?: string;
+  horizon: 'short' | 'medium' | 'long';
+};

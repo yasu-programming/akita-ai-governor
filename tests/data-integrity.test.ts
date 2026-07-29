@@ -1,10 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import fiscal from '../src/data/fiscal.json';
 import industry from '../src/data/industry.json';
-import type { FiscalDataset, IndustryDataset } from '../src/lib/types';
+import policies from '../src/data/policies.json';
+import { AXES } from '../src/lib/constants';
+import type { FiscalDataset, IndustryDataset, Policy } from '../src/lib/types';
 
 const data = fiscal as FiscalDataset;
 const ind = industry as IndustryDataset;
+const cards = policies as Policy[];
 
 describe('fiscal.json', () => {
   it('covers all 47 prefectures with unique sequential codes', () => {
@@ -92,5 +95,81 @@ describe('industry.json', () => {
   it('cites its source and license', () => {
     expect(ind.meta.source).toContain('県民経済計算');
     expect(ind.meta.license).toContain('政府標準利用規約');
+  });
+});
+
+describe('policies.json', () => {
+  it('holds at least 50 cards with unique ids', () => {
+    expect(cards.length).toBeGreaterThanOrEqual(50);
+    expect(new Set(cards.map((c) => c.id)).size).toBe(cards.length);
+  });
+
+  it('scores every axis within -10..10', () => {
+    for (const c of cards) {
+      for (const axis of AXES) {
+        const v = c.scores[axis.key];
+        expect(typeof v, `${c.id}.${axis.key}`).toBe('number');
+        expect(v, `${c.id}.${axis.key}`).toBeGreaterThanOrEqual(-10);
+        expect(v, `${c.id}.${axis.key}`).toBeLessThanOrEqual(10);
+      }
+    }
+  });
+
+  it('assigns a positive cost and a known expense category', () => {
+    const known = new Set([
+      '総務費',
+      '民生費',
+      '衛生費',
+      '労働費',
+      '農林水産業費',
+      '商工費',
+      '土木費',
+      '警察費',
+      '消防費',
+      '教育費',
+      '公債費',
+    ]);
+    for (const c of cards) {
+      expect(c.costOku, c.id).toBeGreaterThan(0);
+      expect(known.has(c.expenseCategory), `${c.id}: ${c.expenseCategory}`).toBe(true);
+    }
+  });
+
+  it('cites at least one source per card', () => {
+    for (const c of cards) {
+      expect(c.evidence.length, c.id).toBeGreaterThanOrEqual(1);
+      for (const e of c.evidence) expect(e.url, c.id).toMatch(/^https:\/\//);
+    }
+  });
+
+  it('describes at least one side effect per card', () => {
+    for (const c of cards) {
+      expect(c.sideEffects.length, c.id).toBeGreaterThanOrEqual(1);
+    }
+  });
+
+  it('covers every axis with both strongly positive and strongly negative cards', () => {
+    for (const axis of AXES) {
+      const values = cards.map((c) => c.scores[axis.key]);
+      expect(Math.max(...values), `${axis.key} max`).toBeGreaterThanOrEqual(6);
+      expect(Math.min(...values), `${axis.key} min`).toBeLessThanOrEqual(-4);
+    }
+  });
+
+  it('keeps every cost inside the 5〜80 億円 band', () => {
+    for (const c of cards) {
+      expect(c.costOku, c.id).toBeGreaterThanOrEqual(5);
+      expect(c.costOku, c.id).toBeLessThanOrEqual(80);
+    }
+  });
+
+  it('offers at least 8 exclusive groups, each with two or more options', () => {
+    const groups = new Map<string, number>();
+    for (const c of cards) {
+      if (!c.exclusiveGroup) continue;
+      groups.set(c.exclusiveGroup, (groups.get(c.exclusiveGroup) ?? 0) + 1);
+    }
+    expect(groups.size).toBeGreaterThanOrEqual(8);
+    for (const [g, n] of groups) expect(n, g).toBeGreaterThanOrEqual(2);
   });
 });

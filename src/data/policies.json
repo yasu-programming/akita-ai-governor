@@ -1,0 +1,1032 @@
+[
+  {
+    "id": "childcare-cost-zero",
+    "name": "第2子以降の保育料完全無償化",
+    "summary": "所得制限を設けず、第2子以降の保育料を県費で全額補助する。",
+    "costOku": 42,
+    "expenseCategory": "民生費",
+    "scores": { "population": 8, "economy": 2, "fiscal": -6, "quality": 6, "durability": 7 },
+    "rationale": "秋田県は歳入に占める地方交付税の比率が35.1%と高く、税収の自然増に頼りにくい。人口面の施策は税収増を待たずに交付税の基準財政需要額に反映されうる領域から着手する構成にしている。保育料の負担軽減は世帯に届くまでの期間が短く、対象世帯にとって効果が見えやすい。",
+    "sideEffects": [
+      "民生費の恒常的な増加となり、単年度で撤回しにくい",
+      "保育の受け皿が不足している地域では、無償化しても利用できない世帯が残る"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "childcare-subsidy",
+    "horizon": "short"
+  },
+  {
+    "id": "childcare-cost-means-tested",
+    "name": "低所得世帯に絞った保育料補助",
+    "summary": "住民税非課税世帯を対象に保育料を全額補助する。対象を絞ることで費用を抑える。",
+    "costOku": 9,
+    "expenseCategory": "民生費",
+    "scores": { "population": 4, "economy": 1, "fiscal": -1, "quality": 7, "durability": 2 },
+    "rationale": "同じ目的に対して、対象を限定することで単年度の裁量枠の消費を抑える選択肢。財政健全化の重みが高いときに、無償化の全面実施に代えて選ばれる。",
+    "sideEffects": [
+      "対象外の中間所得層には効果が及ばない",
+      "所得判定の事務コストが市町村側に発生する"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "childcare-subsidy",
+    "horizon": "short"
+  },
+  {
+    "id": "agri-value-add",
+    "name": "農産物の高付加価値化と輸出支援",
+    "summary": "一次加工施設の整備と輸出手続の伴走支援を組み合わせ、農産物の単価引き上げを図る。",
+    "costOku": 35,
+    "expenseCategory": "農林水産業費",
+    "scores": { "population": 3, "economy": 7, "fiscal": -3, "quality": 1, "durability": 3 },
+    "rationale": "秋田県の農林水産業は県内総生産の構成比で全国平均を上回る一方、第1次産業の付加価値額そのものは県内総生産の3%未満にとどまる。産出量ではなく単価に働きかける構成にしている。",
+    "sideEffects": [
+      "効果が出るまでに複数年度を要し、任期内に数字として表れにくい",
+      "為替と海外需要に左右され、県の裁量が及ばない要因が大きい"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "horizon": "long"
+  },
+  {
+    "id": "school-consolidation",
+    "name": "県立高校の再編と統合",
+    "summary": "生徒数の減少に合わせて県立高校を再編し、教育費の構造を見直す。",
+    "costOku": 12,
+    "expenseCategory": "教育費",
+    "scores": { "population": -2, "economy": 0, "fiscal": 8, "quality": -3, "durability": -8 },
+    "rationale": "人件費は秋田県の性質別歳出の21.8%を占め、単年度の裁量枠だけでは動かせない規模にある。構造的な支出を見直す選択肢として置いているが、政治的持続性の重みが高い場合には選ばれにくい。",
+    "sideEffects": [
+      "通学距離が伸びる地域が生じ、当該地域からの転出を促す可能性がある",
+      "統合対象地域の合意形成に時間を要し、再編中は教育環境が不安定になる"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "child-medical-free",
+    "name": "高校生世代までの医療費無償化",
+    "summary": "18歳到達年度末までの通院・入院にかかる窓口負担を県費で肩代わりする。",
+    "costOku": 48,
+    "expenseCategory": "衛生費",
+    "scores": { "population": 6, "economy": 1, "fiscal": -4, "quality": 7, "durability": 6 },
+    "rationale": "衛生費は目的別歳出で1人当たり21,484円と、教育費の107,718円や民生費の89,286円に比べて小さい区分にあたる。医療費の窓口負担を県費で肩代わりする施策は、この区分に対しては大きな追加となる。子育て世帯にとっては負担軽減が家計に直接届く形になる。",
+    "sideEffects": [
+      "受診の増加により、小児科の医師が少ない地域では待ち時間が延びる",
+      "一度導入すると縮小が難しく、恒常的な負担として残る"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "short"
+  },
+  {
+    "id": "migration-grant-broad",
+    "name": "移住支援金の拡充（全世帯型）",
+    "summary": "県外から転入する世帯に、就業形態を問わず一律の支援金を交付する。",
+    "costOku": 38,
+    "expenseCategory": "総務費",
+    "scores": { "population": 7, "economy": 2, "fiscal": -4, "quality": 2, "durability": 6 },
+    "rationale": "秋田県の人口は924,620人、面積は11,637.52km²で、人口密度は全国でも低い水準にある。転入の絶対数が小さいため、一世帯あたりの支援を厚くしても総額は歳出規模5,716億円に比して小さく収まる。効果を転入世帯数という形で年度内に確認できる。",
+    "sideEffects": [
+      "支援金の有無で移住先を選んだ世帯は、支援終了後に定着しないことがある",
+      "近隣県との支援額の上乗せ競争になりやすい"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "migration-support",
+    "horizon": "short"
+  },
+  {
+    "id": "migration-job-linked",
+    "name": "就業要件付きの移住支援",
+    "summary": "県内の事業所への就業または創業を条件に、移住費用と初期の住居費を補助する。",
+    "costOku": 14,
+    "expenseCategory": "総務費",
+    "scores": { "population": 4, "economy": 4, "fiscal": -1, "quality": 1, "durability": 3 },
+    "rationale": "県内就業を条件にすることで、転入者数と就業者数の双方に効く構成にしている。第3次産業の就業割合が67.2%を占める一方、情報通信業の県内総生産シェアは2.1%と全国の4.7%を下回っており、職種を絞った誘導の余地が残っている。",
+    "sideEffects": [
+      "要件を満たす求人が県都に偏り、郡部への分散が進みにくい",
+      "審査と支給までの手続が長く、転入の意思決定に間に合わないことがある"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "exclusiveGroup": "migration-support",
+    "horizon": "medium"
+  },
+  {
+    "id": "empty-house-renovation",
+    "name": "空き家の改修と住宅取得の支援",
+    "summary": "空き家の改修費と、県外からの転入世帯の住宅取得費の一部を補助する。",
+    "costOku": 32,
+    "expenseCategory": "土木費",
+    "scores": { "population": 5, "economy": 3, "fiscal": -2, "quality": 4, "durability": 5 },
+    "rationale": "土木費は1人当たり92,355円で目的別歳出の上位にある。新規の宅地造成ではなく既存住宅の再利用に振り向けることで、将来の維持管理費を増やさずに住まいの受け皿をつくる構成にしている。",
+    "sideEffects": [
+      "改修後に再び空き家となる物件があり、補助が一過性で終わる場合がある",
+      "地域の施工体制が上限となり、予算を使い切れない年度が生じる"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "fertility-treatment",
+    "name": "不妊治療の自己負担軽減と相談体制の整備",
+    "summary": "保険適用外の治療費への上乗せ助成と、専門の相談窓口を県内に配置する。",
+    "costOku": 18,
+    "expenseCategory": "衛生費",
+    "scores": { "population": 5, "economy": 0, "fiscal": -2, "quality": 6, "durability": 5 },
+    "rationale": "出生数に直接働きかける数少ない領域であり、対象となる世帯が限られるため、衛生費の1人当たり21,484円という規模の中でも実施できる。効果の現れ方は世帯単位で、県全体の統計上は小さな変化として出る。",
+    "sideEffects": [
+      "専門的な治療を行う医療機関が県内で偏在し、通院の負担が残る",
+      "個人の選択に関わる領域であり、支援の存在が圧力と受け取られる場合がある"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "short"
+  },
+  {
+    "id": "childcare-worker-wage",
+    "name": "保育人材の処遇改善加算",
+    "summary": "保育士・幼稚園教諭の給与に県費で上乗せし、配置基準を超える人員配置を支援する。",
+    "costOku": 52,
+    "expenseCategory": "民生費",
+    "scores": { "population": 4, "economy": 2, "fiscal": -4, "quality": 7, "durability": 4 },
+    "rationale": "人件費は性質別歳出の21.8%を占めるが、保育の担い手の多くは県の直接雇用ではないため、県費の加算は補助費等（19.4%）の側で増える構成になる。定員はあっても人手が足りず受け入れられない状態を解くことを狙いとしている。",
+    "sideEffects": [
+      "加算を打ち切った時点で処遇が元に戻り、離職につながる",
+      "他の福祉分野との賃金差が、新たな人材の偏りを生む"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "after-school-care",
+    "name": "放課後児童クラブの全小学校区整備",
+    "summary": "放課後の預かり先がない小学校区を解消し、開所時間の延長を支援する。",
+    "costOku": 30,
+    "expenseCategory": "民生費",
+    "scores": { "population": 4, "economy": 2, "fiscal": -2, "quality": 6, "durability": 5 },
+    "rationale": "民生費は1人当たり89,286円で、教育費に次ぐ規模にある。就学後の預け先が確保できないことによる就業の制約を解く施策であり、第3次産業の就業割合が67.2%という構成のもとでは共働き世帯に届きやすい。",
+    "sideEffects": [
+      "児童数が少ない校区では1人当たりの運営費が高くなる",
+      "指導員の確保が進まず、施設だけが整備される地域が出る"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "plant-incentive-large",
+    "name": "大規模事業所向け立地補助の拡充",
+    "summary": "一定規模以上の設備投資と新規雇用を行う事業所に、投資額に応じた補助を行う。",
+    "costOku": 72,
+    "expenseCategory": "商工費",
+    "scores": { "population": 4, "economy": 8, "fiscal": -6, "quality": 1, "durability": 5 },
+    "rationale": "製造業の県内総生産シェアは19.5%で、全国の21.2%をやや下回る。大規模な設備投資を伴う立地は雇用と付加価値の双方に効くが、商工費の1人当たり39,883円という規模に対して補助額が大きく、他の区分を圧迫する。",
+    "sideEffects": [
+      "補助を受けた事業所が撤退した場合、投じた費用を回収できない",
+      "県内の既存事業者との間で支援の不均衡が生じる"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "exclusiveGroup": "industry-incentive",
+    "horizon": "medium"
+  },
+  {
+    "id": "sme-equipment-support",
+    "name": "県内中小事業者の設備投資補助",
+    "summary": "県内に本社を置く中小事業者の生産設備・業務システムの更新費用を補助する。",
+    "costOku": 34,
+    "expenseCategory": "商工費",
+    "scores": { "population": 1, "economy": 6, "fiscal": -2, "quality": 1, "durability": 3 },
+    "rationale": "同じ産業振興でも、県外からの誘致ではなく県内事業者の生産性に働きかける選択肢。専門・科学技術・業務支援サービス業のシェアが5.9%と全国の8.7%を下回る構造のもとでは、既存事業者の設備更新が付加価値の底上げに寄与しうる。",
+    "sideEffects": [
+      "補助がなくても実施したはずの投資に充てられる場合がある",
+      "1件あたりの金額が小さく、県全体の統計に表れるまで時間がかかる"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "exclusiveGroup": "industry-incentive",
+    "horizon": "medium"
+  },
+  {
+    "id": "incentive-abolish",
+    "name": "立地補助の縮小と一般財源への振替",
+    "summary": "事業所向けの立地補助を段階的に縮小し、財源を一般財源に戻す。",
+    "costOku": 6,
+    "expenseCategory": "商工費",
+    "scores": { "population": -3, "economy": -5, "fiscal": 7, "quality": 0, "durability": -5 },
+    "rationale": "補助費等は性質別歳出の19.4%を占める。事業所向けの補助を縮小して一般財源に戻す選択肢で、財政健全化の重みが高いときに立地補助の拡充に代えて選ばれる。産業側の投資意欲には逆向きに働く。",
+    "sideEffects": [
+      "進行中の投資計画が見直され、雇用計画が縮小する可能性がある",
+      "近隣県との条件差が広がり、立地の照会そのものが減る"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "industry-incentive",
+    "horizon": "short"
+  },
+  {
+    "id": "it-industry-cluster",
+    "name": "情報通信関連産業の集積支援",
+    "summary": "サテライトオフィスの整備、通信基盤の増強、県外からの技術者受け入れを一体で進める。",
+    "costOku": 46,
+    "expenseCategory": "商工費",
+    "scores": { "population": 5, "economy": 7, "fiscal": -3, "quality": 1, "durability": 2 },
+    "rationale": "情報通信業の県内総生産シェアは2.1%で、全国の4.7%の半分以下にとどまる。この差は伸びしろでもあるが、集積が形成されるまでの期間が長く、単年度の数字には表れにくい。",
+    "sideEffects": [
+      "人材の供給が追いつかず、県外からの調達に依存する",
+      "拠点が県都に集中し、郡部への波及が限られる"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "horizon": "long"
+  },
+  {
+    "id": "tourism-inbound",
+    "name": "広域周遊観光と受入環境の整備",
+    "summary": "周遊ルートの整備、多言語対応、宿泊施設の改修支援を組み合わせる。",
+    "costOku": 36,
+    "expenseCategory": "商工費",
+    "scores": { "population": 2, "economy": 6, "fiscal": -3, "quality": 1, "durability": 4 },
+    "rationale": "卸売・小売業のシェアは10.2%で全国の13.4%を下回る。域外からの消費を呼び込む施策はこの差を埋める方向に働く。宿泊と交通の受入能力が制約となるため、施設整備と一体で進める構成にしている。",
+    "sideEffects": [
+      "季節変動が大きく、通年の雇用にはつながりにくい",
+      "国際情勢や為替に左右され、県の裁量が及ばない要因が大きい"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "reskilling-hub",
+    "name": "離職者の再就職訓練とデジタル分野の職業訓練",
+    "summary": "訓練枠の拡大と受講中の生活支援を組み合わせ、成長分野への移動を後押しする。",
+    "costOku": 15,
+    "expenseCategory": "労働費",
+    "scores": { "population": 2, "economy": 4, "fiscal": -1, "quality": 3, "durability": 2 },
+    "rationale": "労働費は1人当たり1,300円と目的別歳出の中で極めて小さい区分であり、少額の追加でも相対的な増加率は大きくなる。第2次産業の就業割合24.0%から第3次産業への移動を支える構成にしている。",
+    "sideEffects": [
+      "訓練修了者の受け皿となる求人が県内に十分になければ、県外就職につながる",
+      "定員に対する応募が地域によって偏り、枠が余る訓練が生じる"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "u-turn-recruit",
+    "name": "県外進学者のUターン就職支援",
+    "summary": "県外の大学等に在学する学生の就職活動費と、県内就職後の奨学金返還を支援する。",
+    "costOku": 11,
+    "expenseCategory": "労働費",
+    "scores": { "population": 6, "economy": 3, "fiscal": -1, "quality": 1, "durability": 4 },
+    "rationale": "進学時の転出が人口の社会減の大きな部分を占める構造に対し、卒業時点での還流に働きかける施策。労働費の1人当たり1,300円という規模の中で実施でき、対象者数と就職者数が把握しやすい。",
+    "sideEffects": [
+      "県外就職を選んだ層には効果がなく、届く範囲が限られる",
+      "採用側の賃金水準が変わらなければ、支援だけでは還流しにくい"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "agri-corporate-scale",
+    "name": "農業法人の大規模化と農地集積",
+    "summary": "法人化の支援と農地の集積・集約により、経営規模の拡大を進める。",
+    "costOku": 44,
+    "expenseCategory": "農林水産業費",
+    "scores": { "population": 0, "economy": 6, "fiscal": -3, "quality": 0, "durability": 1 },
+    "rationale": "農林水産業費は1人当たり75,165円で、目的別歳出の中で5番目に大きい。経営規模の拡大は単位面積あたりの付加価値を高める方向に働くが、担い手の交代を伴うため合意の形成に時間がかかる。",
+    "sideEffects": [
+      "小規模経営からの離農が進み、集落の維持が難しくなる地域が出る",
+      "集積が進んだ後は、担い手1経営体の不振が地域全体の問題になる"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "exclusiveGroup": "agri-support",
+    "horizon": "long"
+  },
+  {
+    "id": "hilly-direct-payment",
+    "name": "中山間地域への直接支払の拡充",
+    "summary": "条件不利地の営農継続に対して、面積に応じた交付金を県費で上乗せする。",
+    "costOku": 26,
+    "expenseCategory": "農林水産業費",
+    "scores": { "population": 3, "economy": 1, "fiscal": -2, "quality": 4, "durability": 5 },
+    "rationale": "面積11,637.52km²に対して人口924,620人という低密度の条件下では、条件不利地の営農継続が耕作放棄地の抑制と直結する。規模拡大とは逆に、いま耕している担い手を支える選択肢として置いている。",
+    "sideEffects": [
+      "経営規模の拡大が進まず、単位面積あたりの付加価値は伸びにくい",
+      "交付を止めた時点で離農が一斉に進む可能性がある"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "agri-support",
+    "horizon": "medium"
+  },
+  {
+    "id": "smart-agriculture",
+    "name": "省力化機械とデータ活用の導入補助",
+    "summary": "自動操舵機械、生育データの活用システムの導入費用を補助する。",
+    "costOku": 30,
+    "expenseCategory": "農林水産業費",
+    "scores": { "population": 1, "economy": 5, "fiscal": -2, "quality": 1, "durability": 3 },
+    "rationale": "第1次産業の就業割合8.8%は全国平均を上回る一方、県内総生産に占める農林水産業のシェアは2.6%にとどまる。就業者1人あたりの付加価値を高める方向に働く構成にしている。",
+    "sideEffects": [
+      "導入費用の自己負担分を賄える経営体に支援が偏る",
+      "機械の更新周期ごとに、同種の支援を求められる"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "forestry-timber-use",
+    "name": "県産材の建築利用拡大と林業人材の確保",
+    "summary": "県産材を使う建築への助成と、林業の就業者向け研修・安全対策を進める。",
+    "costOku": 38,
+    "expenseCategory": "農林水産業費",
+    "scores": { "population": 2, "economy": 5, "fiscal": -3, "quality": 2, "durability": 3 },
+    "rationale": "建設業の県内総生産シェアは8.2%で全国の5.2%を上回る。県内で完結する木材の流れをつくることで、この既存の強みと林業をつなぐ構成にしている。伐採から利用までの周期が長い分野にあたる。",
+    "sideEffects": [
+      "需要の変動が大きく、製材能力の増強が過剰投資となる場合がある",
+      "労働災害の発生率が高い分野であり、安全対策の負担が伴う"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "horizon": "long"
+  },
+  {
+    "id": "fishery-port-consolidate",
+    "name": "漁港施設の集約と共同利用化",
+    "summary": "利用の少ない漁港の機能を近隣の拠点漁港に集約し、施設を共同利用に切り替える。",
+    "costOku": 16,
+    "expenseCategory": "農林水産業費",
+    "scores": { "population": -4, "economy": 1, "fiscal": 6, "quality": -2, "durability": -6 },
+    "rationale": "投資的経費は性質別歳出の25.7%を占め、施設の維持更新が将来の負担として積み上がる構造にある。利用の少ない施設を集約する選択肢だが、拠点から遠い集落では就業の場そのものが失われる。",
+    "sideEffects": [
+      "集約先から遠い集落で転出が進む",
+      "地元の合意の形成に複数年度を要し、その間は更新投資が止まる"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "hospital-keep-all",
+    "name": "公的病院の常勤体制を全施設で維持",
+    "summary": "県内の公的病院すべてで現在の診療科と常勤体制を維持するため、運営費を補助する。",
+    "costOku": 78,
+    "expenseCategory": "衛生費",
+    "scores": { "population": 3, "economy": 1, "fiscal": -8, "quality": 8, "durability": 7 },
+    "rationale": "保健衛生・社会事業の県内総生産シェアは11.6%で全国の8.9%を上回り、医療は県内の雇用と生活の双方を支えている。現在の体制をそのまま維持する選択肢だが、人件費が性質別歳出の21.8%を占める構造のもとでは負担が大きい。",
+    "sideEffects": [
+      "症例数の少ない施設では専門の医師を確保できず、体制の名目だけが残る",
+      "衛生費の恒常的な増加となり、他の区分の裁量枠を圧迫する"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "exclusiveGroup": "medical-network",
+    "horizon": "short"
+  },
+  {
+    "id": "hospital-consolidate",
+    "name": "急性期機能の中核病院への集約",
+    "summary": "救急・手術の機能を中核病院に集め、周辺施設は外来と回復期に役割を変える。",
+    "costOku": 44,
+    "expenseCategory": "衛生費",
+    "scores": { "population": -4, "economy": 0, "fiscal": 7, "quality": -3, "durability": -7 },
+    "rationale": "症例を集約すると1施設あたりの体制は厚くなるが、通院と搬送の距離は伸びる。面積11,637.52km²という広がりのもとでは、集約の便益と移動の負担が地域ごとに逆方向に現れる構成になっている。",
+    "sideEffects": [
+      "集約先から遠い地域では、救急搬送に要する時間が延びる",
+      "地域の雇用が失われ、当該地域からの転出を促す可能性がある"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "medical-network",
+    "horizon": "medium"
+  },
+  {
+    "id": "doctor-scholarship",
+    "name": "医師修学資金と地域枠の拡充",
+    "summary": "県内勤務を条件とする修学資金の枠を広げ、指導体制の整備も併せて支援する。",
+    "costOku": 22,
+    "expenseCategory": "衛生費",
+    "scores": { "population": 2, "economy": 1, "fiscal": -2, "quality": 6, "durability": 3 },
+    "rationale": "医師の県内定着は年度単位では動かず、修学から専門研修を経て勤務に至るまでに10年近い期間を要する。衛生費の1人当たり21,484円という規模の中では小さい支出だが、効果が現れる時点は任期の範囲を超える。",
+    "sideEffects": [
+      "従事義務の期間が終わった後に県外へ移る例がある",
+      "診療科ごとの偏りは、修学資金だけでは是正されない"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "long"
+  },
+  {
+    "id": "online-medical",
+    "name": "へき地のオンライン診療と巡回診療体制",
+    "summary": "遠隔診療の機器整備と巡回診療の運行費を支援し、無医地区の解消を図る。",
+    "costOku": 17,
+    "expenseCategory": "衛生費",
+    "scores": { "population": 2, "economy": 1, "fiscal": -1, "quality": 6, "durability": 4 },
+    "rationale": "人口密度が低く、通院に要する時間が長い地域が広く存在する。施設を新設せずに医療へのアクセスを改善する構成で、中山間地域の通信環境の整備状況に依存する。",
+    "sideEffects": [
+      "高齢の患者では機器の操作が障壁となり、利用が広がらない",
+      "対面でなければ判断できない症状があり、代替できる範囲は限られる"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "elderly-care-capacity",
+    "name": "介護施設の整備と介護人材の確保",
+    "summary": "特別養護老人ホーム等の整備費補助と、介護職員の処遇改善の上乗せを行う。",
+    "costOku": 58,
+    "expenseCategory": "民生費",
+    "scores": { "population": 1, "economy": 3, "fiscal": -5, "quality": 7, "durability": 6 },
+    "rationale": "保健衛生・社会事業のシェアが11.6%と全国の8.9%を上回る構造は、介護需要の大きさを反映している。扶助費は性質別歳出の1.3%にとどまるものの、施設整備と人材確保は投資的経費と補助費等の双方に及ぶ。",
+    "sideEffects": [
+      "整備した施設を運営する人材が確保できず、定員を稼働できない場合がある",
+      "介護保険の枠外にある県費負担が恒常化する"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "care-fee-raise",
+    "name": "高齢者向け県単独給付の見直しと利用者負担の引き上げ",
+    "summary": "県が独自に上乗せしている福祉給付を縮小し、利用者の負担割合を引き上げる。",
+    "costOku": 8,
+    "expenseCategory": "民生費",
+    "scores": { "population": -2, "economy": 0, "fiscal": 7, "quality": -5, "durability": -8 },
+    "rationale": "補助費等は性質別歳出の19.4%を占める。県が独自に上乗せしている給付を見直し、受益者の負担割合を引き上げる選択肢で、財政面には直接効く一方、生活の質の側には明確に逆向きに働く。",
+    "sideEffects": [
+      "負担増により、必要なサービスの利用を控える世帯が生じる",
+      "制度変更の説明の負荷が、市町村の窓口に集中する"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "short"
+  },
+  {
+    "id": "preventive-health",
+    "name": "特定健診の受診率向上と重症化予防",
+    "summary": "健診の受診勧奨と保健指導を強化し、生活習慣病の重症化を抑える。",
+    "costOku": 14,
+    "expenseCategory": "衛生費",
+    "scores": { "population": 0, "economy": 1, "fiscal": 3, "quality": 6, "durability": 1 },
+    "rationale": "発症後の医療給付ではなく予防に配分する構成。衛生費の1人当たり21,484円という規模の中で実施でき、将来の医療費の伸びを抑える方向に働くが、効果が数字として現れるまでの期間が長い。",
+    "sideEffects": [
+      "受診率の向上が直ちに医療費の減少につながるとは限らない",
+      "健康状態を個人の責任に帰する伝え方になりやすい"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "long"
+  },
+  {
+    "id": "small-school-keep",
+    "name": "小規模高校の存続と遠隔授業の導入",
+    "summary": "統合の対象となりうる小規模校を存続させ、遠隔授業で科目数の不足を補う。",
+    "costOku": 34,
+    "expenseCategory": "教育費",
+    "scores": { "population": 3, "economy": 0, "fiscal": -4, "quality": 4, "durability": 6 },
+    "rationale": "教育費は1人当たり107,718円で目的別歳出の最大の区分にあたる。通学できる範囲に高校が残っていることは子育て世帯の居住継続の条件になるため、統合とは逆向きの選択肢として置いている。",
+    "sideEffects": [
+      "1校あたりの教員配置が薄くなり、選択できる科目が限られる",
+      "生徒数の減少が続けば、数年後に同じ判断を迫られる"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "highschool-network",
+    "horizon": "medium"
+  },
+  {
+    "id": "highschool-branch-close",
+    "name": "分校の廃止と通学支援への転換",
+    "summary": "生徒数が一定を下回る分校を廃止し、本校への通学費と寄宿の費用を支援する。",
+    "costOku": 10,
+    "expenseCategory": "教育費",
+    "scores": { "population": -3, "economy": 0, "fiscal": 6, "quality": -4, "durability": -7 },
+    "rationale": "生徒数の減少に対して、施設の維持ではなく通学の支援に切り替える選択肢。教育費が目的別歳出の最大区分であることから、財政面の効果は他の区分の見直しより大きく出る。",
+    "sideEffects": [
+      "通学時間が延び、部活動や家庭学習に使える時間が削られる",
+      "廃止された地域では、子育て世帯の転出要因が一つ増える"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "highschool-network",
+    "horizon": "medium"
+  },
+  {
+    "id": "tuition-waiver-all",
+    "name": "県内進学者の授業料減免（所得制限なし）",
+    "summary": "県内の大学・短大・専門学校に進学する県内出身者の授業料を、所得を問わず減免する。",
+    "costOku": 62,
+    "expenseCategory": "教育費",
+    "scores": { "population": 6, "economy": 2, "fiscal": -6, "quality": 5, "durability": 6 },
+    "rationale": "進学時の転出が社会減の大きな部分を占める構造に対し、県内で学ぶ選択肢の費用を下げる施策。教育の県内総生産シェアは4.5%と全国の3.4%を上回っており、受け皿となる教育機関は一定程度存在する。",
+    "sideEffects": [
+      "県内進学後に県外で就職する層にも費用が及ぶ",
+      "所得制限を設けないため、単年度の裁量枠に占める比重が大きい"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "exclusiveGroup": "higher-education-support",
+    "horizon": "medium"
+  },
+  {
+    "id": "tuition-waiver-stem",
+    "name": "理工・医療系に限定した給付型奨学金",
+    "summary": "県内の産業と人材需要に直結する分野に限り、返還不要の奨学金を給付する。",
+    "costOku": 20,
+    "expenseCategory": "教育費",
+    "scores": { "population": 3, "economy": 5, "fiscal": -1, "quality": 3, "durability": 2 },
+    "rationale": "対象を県内の産業構造と結び付く分野に絞る選択肢。情報通信業のシェアが2.1%と全国の4.7%を下回る構造に対して、人材の側から働きかける構成にしている。",
+    "sideEffects": [
+      "対象外の分野の学生には効果が及ばず、分野間の不公平感が生じる",
+      "進学先の定員が限られており、支援を受けられる人数に上限がある"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "exclusiveGroup": "higher-education-support",
+    "horizon": "long"
+  },
+  {
+    "id": "school-ict",
+    "name": "学習用端末の更新と校内通信環境の整備",
+    "summary": "1人1台端末の更新費用と、校内無線環境の増強を県費で負担する。",
+    "costOku": 32,
+    "expenseCategory": "教育費",
+    "scores": { "population": 1, "economy": 2, "fiscal": -2, "quality": 6, "durability": 4 },
+    "rationale": "端末は数年ごとの更新が必要で、初期整備の後に更新費用が周期的に発生する。教育費が目的別歳出の最大区分であることから、更新時期が集中する年度には単年度の裁量枠を圧迫する。",
+    "sideEffects": [
+      "家庭側の通信環境の差が残り、校外での活用に格差が出る",
+      "更新の周期が来るたびに、同規模の支出が繰り返し必要になる"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "short"
+  },
+  {
+    "id": "teacher-staffing",
+    "name": "教員定数の上乗せと少人数指導",
+    "summary": "国の標準を上回る教員を県費で配置し、少人数指導と個別支援を厚くする。",
+    "costOku": 56,
+    "expenseCategory": "教育費",
+    "scores": { "population": 2, "economy": 0, "fiscal": -6, "quality": 7, "durability": 5 },
+    "rationale": "人件費は性質別歳出の21.8%を占め、定数の上乗せはこの区分を直接押し上げる。学級規模を小さくする効果は在校する生徒に届くが、単年度で撤回すると翌年度の学級編制に影響が及ぶ。",
+    "sideEffects": [
+      "採用を増やした後に生徒数が減ると、教員配置の過剰が長期にわたり残る",
+      "人材の確保が追いつかず、臨時的任用に依存する地域が出る"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "vocational-highschool",
+    "name": "工業・農業高校の実習設備更新と事業所連携",
+    "summary": "実習設備を最新の生産現場に合わせて更新し、県内事業所との共同実習を制度化する。",
+    "costOku": 28,
+    "expenseCategory": "教育費",
+    "scores": { "population": 2, "economy": 5, "fiscal": -2, "quality": 4, "durability": 3 },
+    "rationale": "第2次産業の就業割合は24.0%で、製造業の県内総生産シェアは19.5%にのぼる。卒業と同時に県内で就業する経路を太くする構成で、進学時の転出とは別の流れに働きかける。",
+    "sideEffects": [
+      "設備の更新周期が短く、数年で再び陳腐化する",
+      "連携先となる事業所が近隣にない高校では、同じ内容を実施できない"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "local-rail-subsidy",
+    "name": "地方鉄道の全線維持に対する運行費補助",
+    "summary": "利用者の少ない路線を含め、現行の鉄道路線網を維持するための運行費を補助する。",
+    "costOku": 46,
+    "expenseCategory": "土木費",
+    "scores": { "population": 3, "economy": 1, "fiscal": -5, "quality": 6, "durability": 7 },
+    "rationale": "土木費は1人当たり92,355円で目的別歳出の第3位にある。利用者が少ない路線であっても、通学と通院の手段としての役割は残る。現行の路線網をそのまま維持する選択肢として置いている。",
+    "sideEffects": [
+      "利用者数が回復しなければ、補助額は年々増えていく",
+      "運行事業者の経営判断に、県費が恒常的に組み込まれる"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "transit-network",
+    "horizon": "short"
+  },
+  {
+    "id": "trunk-bus-shift",
+    "name": "拠点間幹線バスとデマンド交通への転換",
+    "summary": "輸送量の少ない区間を幹線バスと予約制の乗合交通に置き換え、拠点間の便数を確保する。",
+    "costOku": 22,
+    "expenseCategory": "土木費",
+    "scores": { "population": -1, "economy": 1, "fiscal": 4, "quality": 0, "durability": -4 },
+    "rationale": "輸送量に見合った手段へ切り替える選択肢。維持費は下がるが、既存路線の沿線では利便性が下がる区間が生じるため、地域ごとの合意の形成に負荷がかかる。",
+    "sideEffects": [
+      "乗り換えが増え、高齢者の移動負担が大きくなる",
+      "運転手の確保が難しく、代替手段の便数を確保できない地域が出る"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "transit-network",
+    "horizon": "medium"
+  },
+  {
+    "id": "road-new-build",
+    "name": "幹線道路の新規整備",
+    "summary": "拠点間の所要時間短縮を目的に、幹線道路の新規区間の整備を進める。",
+    "costOku": 80,
+    "expenseCategory": "土木費",
+    "scores": { "population": 2, "economy": 5, "fiscal": -7, "quality": 3, "durability": 7 },
+    "rationale": "投資的経費は性質別歳出の25.7%を占める。建設業のシェアが8.2%と全国の5.2%を上回る構造のもとでは県内経済への波及が大きい一方、完成後の維持費と償還が将来に積み上がる。",
+    "sideEffects": [
+      "完成までの期間が長く、供用開始の時点で交通需要が計画時と変わっている",
+      "公債費が性質別歳出の15.9%を占める中で、償還負担がさらに増える"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "road-investment",
+    "horizon": "long"
+  },
+  {
+    "id": "infra-longevity",
+    "name": "既存インフラの長寿命化と新規着手の抑制",
+    "summary": "橋梁・トンネル等の予防保全に配分を移し、新規区間の着手を当面見送る。",
+    "costOku": 58,
+    "expenseCategory": "土木費",
+    "scores": { "population": 0, "economy": -4, "fiscal": 5, "quality": 4, "durability": -4 },
+    "rationale": "公債費は1人当たり98,528円で、目的別歳出の第2位にある。新規整備を抑えて既存施設の予防保全に回す選択肢で、将来の更新費用の平準化に働くが、県内の建設需要の総量は減る。",
+    "sideEffects": [
+      "新規整備を待っていた地域から、着手時期の見通しが立たないとの声が出る",
+      "受注の構成が変わり、新設工事を主としてきた事業者が対応できない"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "road-investment",
+    "horizon": "medium"
+  },
+  {
+    "id": "snow-removal",
+    "name": "除雪体制の強化と機械の更新",
+    "summary": "除雪機械の更新と担い手の確保を進め、生活道路まで含めた除雪水準を引き上げる。",
+    "costOku": 44,
+    "expenseCategory": "土木費",
+    "scores": { "population": 2, "economy": 2, "fiscal": -3, "quality": 7, "durability": 8 },
+    "rationale": "冬期の道路維持は生活と経済活動の前提であり、配分の効果が当該年度の冬に直接現れる。土木費の1人当たり92,355円という規模の中では、支出と体感の距離が最も近い部類にある。",
+    "sideEffects": [
+      "降雪量の少ない年には、体制の維持費が過大に見える",
+      "オペレーターの高齢化が進み、機械を更新しても稼働させられない地域が出る"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "short"
+  },
+  {
+    "id": "compact-settlement",
+    "name": "拠点への居住誘導と郊外開発の抑制",
+    "summary": "都市機能と居住を拠点区域に誘導し、区域外の新規開発への支援を段階的に止める。",
+    "costOku": 34,
+    "expenseCategory": "土木費",
+    "scores": { "population": -5, "economy": 1, "fiscal": 6, "quality": 2, "durability": -6 },
+    "rationale": "人口924,620人に対して面積11,637.52km²という低密度の条件下では、上下水道や道路の1人当たり維持費が高くなる。居住を拠点に集める選択肢だが、現在の居住地から離れることを事実上求める側面がある。",
+    "sideEffects": [
+      "誘導の対象外となった地域では、地価と生活サービスがさらに低下する",
+      "居住の自由に関わる領域であり、強い誘導手段を用いにくい"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "long"
+  },
+  {
+    "id": "port-airport-logistics",
+    "name": "港湾・空港の物流機能の強化",
+    "summary": "荷役設備と保管施設を増強し、県内事業者が域外へ出荷する条件を改善する。",
+    "costOku": 46,
+    "expenseCategory": "土木費",
+    "scores": { "population": 1, "economy": 6, "fiscal": -4, "quality": 1, "durability": 3 },
+    "rationale": "製造業のシェアは19.5%で全国の21.2%に近い水準にあり、域外への輸送条件が競争力を左右する。投資的経費が性質別歳出の25.7%を占める構造の中での、配分の選び直しにあたる。",
+    "sideEffects": [
+      "取扱量が計画に届かない場合、維持費だけが残る",
+      "貨物の流れは事業者の判断に依存し、県の裁量が及ばない"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "horizon": "long"
+  },
+  {
+    "id": "debt-early-redemption",
+    "name": "県債の繰上償還と基金への積み増し",
+    "summary": "利率の高い県債を繰り上げて償還し、残りを財政調整基金に積み立てる。",
+    "costOku": 76,
+    "expenseCategory": "公債費",
+    "scores": { "population": -2, "economy": -3, "fiscal": 9, "quality": -2, "durability": -6 },
+    "rationale": "公債費は性質別歳出の15.9%、目的別では1人当たり98,528円にのぼる。歳入に占める地方債は12.1%であり、将来の償還負担を前倒しで減らす選択肢にあたる。単年度では他の施策に使える枠がその分減る。",
+    "sideEffects": [
+      "同じ額を現在の行政サービスに充てた場合の便益を放棄することになる",
+      "効果が将来の負担軽減という形でしか現れず、当該年度には見えにくい"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "facility-consolidation",
+    "name": "公の施設の集約と使用料の見直し",
+    "summary": "利用の少ない県有施設を廃止・統合し、存続する施設の使用料を引き上げる。",
+    "costOku": 12,
+    "expenseCategory": "総務費",
+    "scores": { "population": -3, "economy": 0, "fiscal": 8, "quality": -5, "durability": -8 },
+    "rationale": "投資的経費が性質別歳出の25.7%を占める中、既存施設の維持更新は将来に固定的な負担を残す。施設数を減らし、残る施設の受益者負担を引き上げる選択肢で、財政面の効果は明確に出る。",
+    "sideEffects": [
+      "利用者は移動距離と負担額の双方が増える",
+      "地域の集会や活動の場が失われ、住民の自主的な活動が縮小する"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "facility-policy",
+    "horizon": "medium"
+  },
+  {
+    "id": "facility-maintain",
+    "name": "公の施設を現行水準で維持",
+    "summary": "県有施設を廃止せず、使用料も据え置いたまま計画的に修繕する。",
+    "costOku": 42,
+    "expenseCategory": "総務費",
+    "scores": { "population": 1, "economy": 0, "fiscal": -5, "quality": 5, "durability": 6 },
+    "rationale": "総務費は1人当たり51,698円。既存の施設をそのまま維持する選択肢で、生活の質と受け入れやすさの面では有利だが、老朽化した施設の更新費用が将来に積み上がる。",
+    "sideEffects": [
+      "更新時期が集中する年度に、大きな支出が一度に発生する",
+      "利用者数が少ない施設も、同じ基準で維持することになる"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "facility-policy",
+    "horizon": "short"
+  },
+  {
+    "id": "admin-staffing-cut",
+    "name": "職員定数の削減と定型業務の外部化",
+    "summary": "定型的な内部事務を外部委託に切り替え、職員定数を段階的に削減する。",
+    "costOku": 14,
+    "expenseCategory": "総務費",
+    "scores": { "population": -2, "economy": -2, "fiscal": 7, "quality": -3, "durability": -6 },
+    "rationale": "人件費は性質別歳出の21.8%を占め、単年度の裁量枠およそ286億円だけでは動かせない規模にある。構造的な支出を見直す選択肢だが、窓口対応や災害時の動員力に影響が及ぶ。",
+    "sideEffects": [
+      "繁忙期の対応力が落ち、申請処理の遅れが生じる",
+      "外部化した業務の委託費が数年後に上昇し、削減幅が縮む"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "municipal-shared-service",
+    "name": "市町村との共同事務処理センターの設置",
+    "summary": "給与計算・調達などの内部管理事務を県と市町村で共同処理する体制をつくる。",
+    "costOku": 18,
+    "expenseCategory": "総務費",
+    "scores": { "population": 0, "economy": 1, "fiscal": 5, "quality": 2, "durability": 1 },
+    "rationale": "総務費は1人当たり51,698円で、内部管理の事務は県と市町村で重複しやすい。人口924,620人という規模に対して自治体数が多い構造のもとでは、共同処理による削減余地が残っている。",
+    "sideEffects": [
+      "参画する市町村が少ないと、初期投資に見合う削減にならない",
+      "各団体の運用の違いを揃える調整に、数年度を要する"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "river-improvement",
+    "name": "河川改修と堤防の整備",
+    "summary": "浸水被害の想定区域を対象に、河道の掘削と堤防の強化を計画的に進める。",
+    "costOku": 68,
+    "expenseCategory": "土木費",
+    "scores": { "population": 1, "economy": 3, "fiscal": -6, "quality": 7, "durability": 6 },
+    "rationale": "災害復旧費として1人当たり10,747円が計上されており、被害の発生が事後の支出という形で現れる構造にある。事前の整備に配分する選択肢で、投資的経費25.7%の中での位置づけとなる。",
+    "sideEffects": [
+      "整備の完了までに複数年度を要し、その間の被害は避けられない",
+      "整備区間の選定が、地域間の比較の対象となる"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "disaster-response",
+    "horizon": "long"
+  },
+  {
+    "id": "evacuation-readiness",
+    "name": "避難体制の強化と防災情報基盤の整備",
+    "summary": "避難計画の策定支援、情報伝達手段の多重化、要支援者の個別計画づくりを進める。",
+    "costOku": 16,
+    "expenseCategory": "総務費",
+    "scores": { "population": 0, "economy": 0, "fiscal": 0, "quality": 6, "durability": 3 },
+    "rationale": "施設の整備ではなく、避難計画と情報伝達に配分する選択肢。総務費の1人当たり51,698円という規模の中で実施でき、着手から運用開始までの期間が短い。",
+    "sideEffects": [
+      "情報を受け取れない世帯が残り、伝達の空白が生じる",
+      "実際の災害が起きるまで、体制の実効性を確認しにくい"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "disaster-response",
+    "horizon": "short"
+  },
+  {
+    "id": "police-facility-reorg",
+    "name": "警察施設の配置見直しと駐在所の統合",
+    "summary": "人口が減少した区域の駐在所を統合し、車両によるパトロール体制に切り替える。",
+    "costOku": 10,
+    "expenseCategory": "警察費",
+    "scores": { "population": -2, "economy": 0, "fiscal": 5, "quality": -4, "durability": -6 },
+    "rationale": "警察費は1人当たり28,866円。人口密度が低く広い区域を受け持つ構造のもとで施設を統合する選択肢だが、統合された地域では現場に到着するまでの時間が延びる。",
+    "sideEffects": [
+      "統合された地域で、体感治安が悪化する",
+      "巡回の頻度が下がり、高齢者世帯の見守り機能が弱まる"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "traffic-safety",
+    "name": "高齢者の交通安全対策と生活道路の安全化",
+    "summary": "安全運転支援装置の導入補助、信号・標識の更新、通学路の安全対策を進める。",
+    "costOku": 20,
+    "expenseCategory": "警察費",
+    "scores": { "population": 0, "economy": 0, "fiscal": -1, "quality": 6, "durability": 4 },
+    "rationale": "高齢化率が高く、自家用車への依存度も高い条件下では、交通事故の抑止が生活の質に直接効く。警察費の1人当たり28,866円という規模の中で、設備と啓発の双方に配分する構成にしている。",
+    "sideEffects": [
+      "運転免許の返納が進むと、代替となる移動手段の需要が増える",
+      "事故の減少は複数の要因によるもので、施策単独の寄与を切り分けにくい"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "offshore-wind-chain",
+    "name": "洋上風力関連産業の育成と港湾人材の確保",
+    "summary": "部材供給と保守作業を県内事業者が担えるよう、技術者育成と拠点港の機能整備を進める。",
+    "costOku": 66,
+    "expenseCategory": "商工費",
+    "scores": { "population": 4, "economy": 8, "fiscal": -5, "quality": 2, "durability": 5 },
+    "rationale": "建設業のシェアが8.2%と全国の5.2%を上回る一方、製造業は19.5%で全国をやや下回る。大型の再生可能エネルギー案件の部材供給と保守を県内に取り込む構成だが、体制が整うまでの期間が長い。",
+    "sideEffects": [
+      "工事の主要部分が県外の事業者に流れると、県内への波及が限られる",
+      "漁業など既存の海域利用との調整に時間を要する"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "exclusiveGroup": "renewable-energy",
+    "horizon": "long"
+  },
+  {
+    "id": "distributed-renewable",
+    "name": "小水力・木質バイオマスの地域分散型導入",
+    "summary": "小規模な発電・熱供給設備を各地域に分散して導入し、燃料調達を県内で完結させる。",
+    "costOku": 28,
+    "expenseCategory": "商工費",
+    "scores": { "population": 1, "economy": 4, "fiscal": -2, "quality": 3, "durability": 2 },
+    "rationale": "大型案件に代えて、小規模な設備を各地域に分散して導入する選択肢。農林水産業のシェアが2.6%と全国の0.9%を大きく上回る構造のもとでは、燃料となる木質資源の調達を県内で組み立てやすい。",
+    "sideEffects": [
+      "設備あたりの発電量が小さく、産業としての規模になりにくい",
+      "運転と保守の担い手が地域に定着しないと、稼働率が下がる"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "exclusiveGroup": "renewable-energy",
+    "horizon": "medium"
+  },
+  {
+    "id": "building-efficiency",
+    "name": "住宅・県有施設の断熱改修支援",
+    "summary": "既存住宅の断熱改修への補助と、県有施設の省エネ改修を同時に進める。",
+    "costOku": 34,
+    "expenseCategory": "土木費",
+    "scores": { "population": 1, "economy": 3, "fiscal": -2, "quality": 6, "durability": 4 },
+    "rationale": "冬期の暖房需要が大きい気候条件のもとでは、断熱性能の改善が光熱費と健康の双方に効く。建設業のシェアが8.2%と全国の5.2%を上回る構造から、施工を担う事業者は県内に一定数存在する。",
+    "sideEffects": [
+      "持ち家世帯に効果が偏り、借家世帯には届きにくい",
+      "改修費の自己負担分が用意できない世帯は対象から外れる"
+    ],
+    "evidence": [
+      { "label": "内閣府 県民経済計算 主要系列表1", "url": "https://www.esri.cao.go.jp/jp/sna/data/data_list/kenmin/files/contents/main_2022.html" }
+    ],
+    "horizon": "medium"
+  },
+  {
+    "id": "gov-system-overhaul",
+    "name": "行政システムの全面刷新",
+    "summary": "内部事務と申請受付のシステムを一括して刷新し、手続をオンラインに移す。",
+    "costOku": 56,
+    "expenseCategory": "総務費",
+    "scores": { "population": 0, "economy": 2, "fiscal": -5, "quality": 4, "durability": 1 },
+    "rationale": "物件費は性質別歳出の4.4%にとどまるが、システムの更新費用はこの区分に集中する。全面刷新は移行が完了するまで効果が出ず、着手した年度には負担だけが計上される。",
+    "sideEffects": [
+      "移行期間中は従来の手順と併存し、現場の負荷が一時的に増える",
+      "仕様の確定が遅れると、費用が当初の想定を超える"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "digital-government",
+    "horizon": "long"
+  },
+  {
+    "id": "cloud-stepwise",
+    "name": "共同利用型クラウドへの段階移行",
+    "summary": "市町村との共同利用を前提に、更新時期が来た業務から順にクラウドへ移す。",
+    "costOku": 22,
+    "expenseCategory": "総務費",
+    "scores": { "population": 0, "economy": 1, "fiscal": 2, "quality": 3, "durability": 1 },
+    "rationale": "全面刷新に代えて、更新時期に合わせて段階的に移行する選択肢。総務費の1人当たり51,698円という規模の中で年度ごとに区切って進められ、途中で方針を変えやすい。",
+    "sideEffects": [
+      "移行が済んだ業務と済まない業務が併存し、全体の効率化は遅れる",
+      "共同利用の調整に、市町村側の事務負担が発生する"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "exclusiveGroup": "digital-government",
+    "horizon": "medium"
+  },
+  {
+    "id": "rural-broadband",
+    "name": "中山間地域の高速通信網の整備",
+    "summary": "光回線と携帯電話網の未整備地区を解消し、維持費の一部を県が負担する。",
+    "costOku": 40,
+    "expenseCategory": "総務費",
+    "scores": { "population": 4, "economy": 5, "fiscal": -3, "quality": 5, "durability": 4 },
+    "rationale": "情報通信業のシェアが2.1%と全国の4.7%を下回る構造のもとで、通信環境は就業と遠隔医療の前提条件にあたる。面積11,637.52km²に対して人口密度が低いため、1世帯あたりの整備費は高くなる。",
+    "sideEffects": [
+      "整備後の維持費を誰が負担するかが、地域ごとに未解決のまま残る",
+      "整備しても利用が進まない地域では、費用に見合う効果が得られない"
+    ],
+    "evidence": [
+      { "label": "総務省 令和5年度都道府県財政指数表", "url": "https://www.soumu.go.jp/iken/ruiji/todohuken_r05.html" }
+    ],
+    "horizon": "medium"
+  }
+]
