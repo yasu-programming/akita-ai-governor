@@ -24,3 +24,58 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ------------------------------------------------------------------ *
+ * データ可視化トークン（dataviz スキルの規約に準拠）
+ *
+ * チャートを含むツリーに .viz-root を付けると、以下の役割名で色が引ける。
+ * ライト／ダークは CSS 側で切り替わるので、JS でテーマを判定しない。
+ * 検証済みの値のみを使う（validate_palette.js で全チェック PASS）。
+ *   カテゴリ 1=青 / 2=橙、正負の対比 青↔赤、面の色は本アプリの実際の背景色。
+ * ------------------------------------------------------------------ */
+.viz-root {
+  color-scheme: light;
+  --viz-surface: #ffffff;
+  --viz-ink: #0b0b0b;
+  --viz-ink-secondary: #52514e;
+  --viz-muted: #898781;
+  --viz-grid: #e1e0d9;
+  --viz-axis: #c3c2b7;
+  --viz-series-1: #2a78d6;
+  --viz-series-2: #eb6834;
+  --viz-positive: #2a78d6;
+  --viz-negative: #e34948;
+  --viz-track: #cde2fb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) .viz-root {
+    color-scheme: dark;
+    --viz-surface: #0a0a0a;
+    --viz-ink: #ffffff;
+    --viz-ink-secondary: #c3c2b7;
+    --viz-muted: #898781;
+    --viz-grid: #2c2c2a;
+    --viz-axis: #383835;
+    --viz-series-1: #3987e5;
+    --viz-series-2: #d95926;
+    --viz-positive: #3987e5;
+    --viz-negative: #e66767;
+    --viz-track: #184f95;
+  }
+}
+
+:root[data-theme="dark"] .viz-root {
+  color-scheme: dark;
+  --viz-surface: #0a0a0a;
+  --viz-ink: #ffffff;
+  --viz-ink-secondary: #c3c2b7;
+  --viz-muted: #898781;
+  --viz-grid: #2c2c2a;
+  --viz-axis: #383835;
+  --viz-series-1: #3987e5;
+  --viz-series-2: #d95926;
+  --viz-positive: #3987e5;
+  --viz-negative: #e66767;
+  --viz-track: #184f95;
+}
