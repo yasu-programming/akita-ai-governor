@@ -15,12 +15,14 @@ import {
 import { fiscalData } from '@/lib/fiscal';
 import {
   EXPENSE_MODES,
+  EXPENSE_SORTS,
   expenseCategories,
   expenseMean,
   expenseRanking,
   FISCAL_AVERAGE_LABEL,
   formatExpenseValue,
   type ExpenseMode,
+  type ExpenseSort,
 } from '@/lib/data-view';
 import { ChartTooltip } from './ChartTooltip';
 import { ChartLegend, DataTable, FilterRow, SelectField, SourceNote, TableDetails } from './parts';
@@ -44,6 +46,7 @@ export function ExpenseBars() {
   const categories = useMemo(() => expenseCategories(mode), [mode]);
   const [purposeCategory, setPurposeCategory] = useState('民生費');
   const [natureCategory, setNatureCategory] = useState('人件費');
+  const [sort, setSort] = useState<ExpenseSort>('desc');
 
   const category = mode === 'purpose' ? purposeCategory : natureCategory;
   const setCategory = mode === 'purpose' ? setPurposeCategory : setNatureCategory;
@@ -52,8 +55,8 @@ export function ExpenseBars() {
   const activeCategory = categories.includes(category) ? category : categories[0];
 
   const rows = useMemo(
-    () => expenseRanking(mode, activeCategory, 'desc'),
-    [mode, activeCategory],
+    () => expenseRanking(mode, activeCategory, sort),
+    [mode, activeCategory, sort],
   );
   const average = useMemo(() => expenseMean(mode, activeCategory), [mode, activeCategory]);
 
@@ -90,6 +93,18 @@ export function ExpenseBars() {
             </option>
           ))}
         </SelectField>
+        <SelectField
+          id="expense-sort"
+          label="並べ替え"
+          value={sort}
+          onChange={(value) => setSort(value as ExpenseSort)}
+        >
+          {EXPENSE_SORTS.map((s) => (
+            <option key={s.sort} value={s.sort}>
+              {s.label}
+            </option>
+          ))}
+        </SelectField>
       </FilterRow>
 
       <ChartLegend
@@ -101,7 +116,7 @@ export function ExpenseBars() {
 
       <p className="mt-3 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
         秋田県の{activeCategory}は {format(akita.value)}で、47都道府県中 {akita.rank} 位です（
-        {FISCAL_AVERAGE_LABEL}は {format(average)}）。
+        {FISCAL_AVERAGE_LABEL}は {format(average)}）。順位は並べ替えを変えても動きません。
       </p>
 
       <div
@@ -162,7 +177,8 @@ export function ExpenseBars() {
       <TableDetails minWidth="22rem">
         <DataTable>
           <caption className="sr-only">
-            47都道府県の{activeCategory}（{modeInfo.unit}、多い順）
+            47都道府県の{activeCategory}（{modeInfo.unit}、
+            {EXPENSE_SORTS.find((s) => s.sort === sort)!.label}）
           </caption>
           <thead className="text-neutral-500 dark:text-neutral-400">
             <tr>

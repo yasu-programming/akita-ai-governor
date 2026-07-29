@@ -128,13 +128,23 @@ function expenseRecord(p: PrefectureFiscal, mode: ExpenseMode): Record<string, n
  * 長さ 0 の棒しか描けないので落とす。
  */
 export function expenseCategories(mode: ExpenseMode): string[] {
-  const first = fiscalData.prefectures[0];
-  return Object.keys(expenseRecord(first, mode)).filter((key) =>
-    fiscalData.prefectures.some((p) => (expenseRecord(p, mode)[key] ?? 0) !== 0),
-  );
+  // 1 県目のキーだけを見ると、その県にない区分を取りこぼす。全県の和を取る
+  const keys: string[] = [];
+  for (const p of fiscalData.prefectures) {
+    for (const key of Object.keys(expenseRecord(p, mode))) {
+      if (!keys.includes(key)) keys.push(key);
+    }
+  }
+  return keys.filter((key) => fiscalData.prefectures.some((p) => (expenseRecord(p, mode)[key] ?? 0) !== 0));
 }
 
 export type ExpenseSort = 'desc' | 'asc' | 'code';
+
+export const EXPENSE_SORTS: { sort: ExpenseSort; label: string }[] = [
+  { sort: 'desc', label: '多い順' },
+  { sort: 'asc', label: '少ない順' },
+  { sort: 'code', label: '都道府県コード順' },
+];
 
 export type ExpenseRow = {
   code: string;
@@ -229,11 +239,8 @@ export function shortSector(sector: string): string {
   return SECTOR_SHORT[sector] ?? sector;
 }
 
-/** ある県の業種別構成比と全国との差。差の大きい順（降順） */
-export function sectorDeviations(
-  code: string,
-  year: string = industryData.latestYear,
-): SectorDeviation[] {
+/** 並べ替えをせず、industryData.sectors の順で返す */
+function rawDeviations(code: string, year: string): SectorDeviation[] {
   const list = industryData.years[year];
   if (!list) throw new Error(`unknown year: ${year}`);
   const p = list.find((x) => x.code === code);
@@ -242,13 +249,38 @@ export function sectorDeviations(
   const prefShares = sectorShares(p);
   const nationalShares = nationalSectorShares(year);
 
-  return industryData.sectors
-    .map((sector) => {
-      const pref = prefShares[sector] ?? 0;
-      const national = nationalShares[sector] ?? 0;
-      return { sector, short: shortSector(sector), pref, national, diff: pref - national };
-    })
-    .sort((a, b) => b.diff - a.diff || a.sector.localeCompare(b.sector));
+  return industryData.sectors.map((sector) => {
+    const pref = prefShares[sector] ?? 0;
+    const national = nationalShares[sector] ?? 0;
+    return { sector, short: shortSector(sector), pref, national, diff: pref - national };
+  });
+}
+
+/**
+ * 業種の並び順。最新年度の差の大きい順で決め、どの年度を見ても同じ順にする。
+ *
+ * 年度ごとに並べ替えると、年度セレクタを動かすたびに行が入れ替わり、
+ * 「値が変わったのか、行が入れ替わったのか」が見分けられなくなる。
+ * 年度をまたいで比べることがこのグラフの目的なので、軸は固定する。
+ */
+export function sectorOrder(code: string): string[] {
+  return rawDeviations(code, industryData.latestYear)
+    .sort((a, b) => b.diff - a.diff || a.sector.localeCompare(b.sector))
+    .map((d) => d.sector);
+}
+
+/**
+ * ある県の業種別構成比と全国との差。
+ * 並びは最新年度の差の大きい順で固定してあり、年度を変えても動かない。
+ */
+export function sectorDeviations(
+  code: string,
+  year: string = industryData.latestYear,
+): SectorDeviation[] {
+  const order = sectorOrder(code);
+  return rawDeviations(code, year).sort(
+    (a, b) => order.indexOf(a.sector) - order.indexOf(b.sector),
+  );
 }
 
 export type SectorTrendRow = { year: string; pref: number; national: number };
@@ -274,7 +306,6 @@ export function sectorTrend(code: string, sector: string): SectorTrendRow[] {
 /** 歳入項目の短縮表記。軸ラベルにしか使わない */
 export const REVENUE_SHORT: Record<string, string> = {
   '市町村たばこ税都道府県交付金': 'たばこ税交付金',
-  '国有提供施設等所在市町村助成交付金': '国有提供施設交付金',
   '交通安全対策特別交付金': '交通安全交付金',
 };
 
@@ -351,7 +382,7 @@ export const INDUSTRY_THREE_LABELS: { key: 'primary' | 'secondary' | 'tertiary';
   { key: 'tertiary', label: '第3次産業' },
 ];
 
-/** 第1次・第2次・第3次産業の比率(%)。積み上げ棒 2 本ぶん */
+/** 第1次・第2次・第3次産業の比率(%)。2 県ぶんを表に並べる */
 export function industryStackRows(a: PrefectureFiscal, b: PrefectureFiscal): IndustryStackRow[] {
   return [a, b].map((p) => ({
     code: p.code,

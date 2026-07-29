@@ -48,6 +48,10 @@ export function IndustryComposition() {
   const trend = useMemo(() => sectorTrend(AKITA_CODE, sector), [sector]);
 
   const higher = deviations.filter((d) => d.diff > 0).length;
+  // 並びは固定なので、その年度の最大・最小は値から取る
+  const byDiff = useMemo(() => [...deviations].sort((a, b) => b.diff - a.diff), [deviations]);
+  const widest = byDiff[0];
+  const narrowest = byDiff[byDiff.length - 1];
 
   return (
     <figure className="viz-root">
@@ -57,6 +61,8 @@ export function IndustryComposition() {
         </span>
         県内総生産に占める業種別の構成比を、{INDUSTRY_AVERAGE_LABEL}と比べた差（ポイント）です。
         右に伸びるほど全国より比重が大きく、左に伸びるほど小さい業種です。
+        業種の並びは{industryData.latestYear}年度の差の大きい順で固定してあり、
+        年度を変えても入れ替わりません。
       </figcaption>
 
       <FilterRow>
@@ -77,10 +83,9 @@ export function IndustryComposition() {
       />
 
       <p className="mt-3 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
-        {year}年度は 16 業種のうち {higher} 業種で全国を上回っています。最も差が大きいのは
-        {deviations[0].sector}（{formatPoint(deviations[0].diff)}）、最も小さいのは
-        {deviations[deviations.length - 1].sector}（
-        {formatPoint(deviations[deviations.length - 1].diff)}）です。
+        {year}年度は {deviations.length} 業種のうち {higher} 業種で全国を上回っています。
+        最も差が大きいのは {widest.sector}（{formatPoint(widest.diff)}）、最も小さいのは
+        {narrowest.sector}（{formatPoint(narrowest.diff)}）です。
       </p>
 
       <div
@@ -141,7 +146,8 @@ export function IndustryComposition() {
       <TableDetails minWidth="24rem">
         <DataTable>
           <caption className="sr-only">
-            秋田県の業種別構成比と全国との差（{year}年度、差の大きい順）
+            秋田県の業種別構成比と全国との差（{year}年度、{industryData.latestYear}
+            年度の差の大きい順に固定）
           </caption>
           <thead className="text-neutral-500 dark:text-neutral-400">
             <tr>
@@ -175,9 +181,9 @@ export function IndustryComposition() {
       </TableDetails>
 
       <div className="mt-8 border-t border-neutral-200 pt-6 dark:border-neutral-800">
-        <p className="text-base font-medium text-neutral-900 dark:text-neutral-100">
+        <h3 className="text-base font-medium text-neutral-900 dark:text-neutral-100">
           1 業種の構成比の推移
-        </p>
+        </h3>
         <p className="mt-1 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
           {years[0]}年度から {years[years.length - 1]}年度までの、秋田県と全国の構成比(%)です。
         </p>

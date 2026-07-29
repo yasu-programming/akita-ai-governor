@@ -5,6 +5,7 @@ import {
   expenseMean,
   expenseRanking,
   FISCAL_AVERAGE_LABEL,
+  INDUSTRY_AVERAGE_LABEL,
   formatPercent,
   formatPoint,
   formatYen,
@@ -137,11 +138,12 @@ describe('expenseRanking', () => {
     }
   });
 
-  it('is deterministic — ties are broken by prefecture code, never by chance', () => {
-    const first = expenseRanking('nature', '人件費', 'desc').map((r) => r.code);
-    for (let i = 0; i < 20; i++) {
-      expect(expenseRanking('nature', '人件費', 'desc').map((r) => r.code)).toEqual(first);
-    }
+  it('breaks ties by prefecture code so equal values never depend on input order', () => {
+    // 性質別の 0 が並ぶ区分を使う。同値が多数あっても並びはコード昇順で決まる
+    const rows = expenseRanking('nature', '投資及び出資金', 'desc');
+    const zeros = rows.filter((r) => r.value === 0);
+    expect(zeros.length, '同値の行がないと同点処理を検証できない').toBeGreaterThan(1);
+    expect(zeros.map((r) => r.code)).toEqual([...zeros.map((r) => r.code)].sort());
   });
 
   it('reads real Akita values and a mean consistent with them', () => {
@@ -209,11 +211,9 @@ describe('nationalSectorShares', () => {
 describe('sectorDeviations', () => {
   const dev = sectorDeviations('05', '2022');
 
-  it('covers every sector, sorted by deviation descending', () => {
+  it('covers every sector', () => {
     expect(dev).toHaveLength(industryData.sectors.length);
-    for (let i = 1; i < dev.length; i++) {
-      expect(dev[i - 1].diff).toBeGreaterThanOrEqual(dev[i].diff);
-    }
+    expect(new Set(dev.map((d) => d.sector)).size).toBe(industryData.sectors.length);
   });
 
   it('computes diff as prefecture minus national', () => {
@@ -230,6 +230,26 @@ describe('sectorDeviations', () => {
     expect(by['情報通信業'].pref).toBeCloseTo(2.1, 1);
     expect(by['情報通信業'].diff).toBeLessThan(0);
     expect(by['農林水産業'].diff).toBeGreaterThan(0);
+  });
+
+  /**
+   * 年度セレクタを動かしたときに行が入れ替わると、値が変わったのか行が動いたのか
+   * 見分けられなくなる。並びは最新年度で固定する。
+   */
+  it('keeps the sector order identical across every year', () => {
+    const baseline = sectorDeviations('05', industryData.latestYear).map((d) => d.sector);
+    for (const year of industryYears()) {
+      expect(sectorDeviations('05', year).map((d) => d.sector), year).toEqual(baseline);
+    }
+    // 固定された並びは、最新年度では差の降順になっている
+    const latest = sectorDeviations('05', industryData.latestYear);
+    for (let i = 1; i < latest.length; i++) {
+      expect(latest[i - 1].diff).toBeGreaterThanOrEqual(latest[i].diff);
+    }
+    // 過去の年度では降順とは限らない（＝並びが年度ごとに組み替えられていない証拠）
+    const old2013 = sectorDeviations('05', '2013');
+    const isDesc = old2013.every((d, i) => i === 0 || old2013[i - 1].diff >= d.diff);
+    expect(isDesc, '2013年度が降順になっている＝年度ごとに並べ替えている').toBe(false);
   });
 
   it('rejects an unknown prefecture code', () => {
@@ -346,8 +366,30 @@ describe('number formatting', () => {
 });
 
 describe('average labels', () => {
-  it('names which average each chart family uses so a reader never has to guess', () => {
+  /**
+   * 財政と産業で「全国」の意味が違う（47県の単純平均 / 47県の合計から算出）。
+   * ラベルが同じ文字列になると読み手が取り違えるので、別物であることを固定する。
+   */
+  it('gives the two different national definitions distinguishable labels', () => {
+    expect(FISCAL_AVERAGE_LABEL).not.toBe(INDUSTRY_AVERAGE_LABEL);
     expect(FISCAL_AVERAGE_LABEL).toContain('単純平均');
+    expect(INDUSTRY_AVERAGE_LABEL).toContain('合計');
+    // どちらも裸の「全国平均」ではない（どちらの平均か分からなくなるため）
     expect(FISCAL_AVERAGE_LABEL).not.toBe('全国平均');
+    expect(INDUSTRY_AVERAGE_LABEL).not.toBe('全国平均');
+  });
+
+  /** ラベルの定義と実際の計算が食い違わないこと */
+  it('computes each average the way its label claims', () => {
+    // 財政: 47 県の単純平均
+    const simple =
+      fiscalData.prefectures.reduce((sum, p) => sum + (p.revenueShare['地方交付税'] ?? 0), 0) / 47;
+    expect(meanRevenueShare('地方交付税')).toBeCloseTo(simple, 10);
+
+    // 産業: 47 県の合計から算出（各県シェアの単純平均ではない）
+    const list = industryData.years['2022'];
+    const naiveMean = mean(list.map((p) => sectorShares(p)['製造業'] ?? 0));
+    const aggregate = nationalSectorShares('2022')['製造業'];
+    expect(aggregate).not.toBeCloseTo(naiveMean, 2);
   });
 });

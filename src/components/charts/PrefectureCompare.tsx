@@ -72,9 +72,9 @@ export function PrefectureCompare() {
       <ChartLegend items={legend} />
 
       {/* 歳入構成比 */}
-      <p className="mt-6 text-sm font-medium text-neutral-900 dark:text-neutral-100">
+      <h3 className="mt-6 text-sm font-medium text-neutral-900 dark:text-neutral-100">
         歳入の構成比（%）
-      </p>
+      </h3>
       <div
         className="mt-2 w-full overflow-x-auto"
         style={{ height: `${revenue.length * ROW_HEIGHT + 48}px` }}
@@ -145,9 +145,9 @@ export function PrefectureCompare() {
       </TableDetails>
 
       {/* 目的別歳出 */}
-      <p className="mt-8 text-sm font-medium text-neutral-900 dark:text-neutral-100">
+      <h3 className="mt-8 text-sm font-medium text-neutral-900 dark:text-neutral-100">
         目的別歳出（人口1人当たり円）
-      </p>
+      </h3>
       <div
         className="mt-2 w-full overflow-x-auto"
         style={{ height: `${purpose.length * ROW_HEIGHT + 48}px` }}
@@ -217,9 +217,9 @@ export function PrefectureCompare() {
       </TableDetails>
 
       {/* 産業の 3 区分と規模は表で足りる。棒を足しても情報が増えない */}
-      <p className="mt-8 text-sm font-medium text-neutral-900 dark:text-neutral-100">
+      <h3 className="mt-8 text-sm font-medium text-neutral-900 dark:text-neutral-100">
         産業の 3 区分と規模
-      </p>
+      </h3>
       <div className="mt-2 overflow-x-auto">
         <DataTable>
           <caption className="sr-only">

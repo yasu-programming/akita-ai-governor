@@ -213,7 +213,7 @@ export function RevenueScatter() {
                   row.akita ? 'font-semibold text-neutral-900 dark:text-neutral-100' : ''
                 }`}
               >
-                <th scope="row" className="py-1 pr-3 font-inherit text-left font-normal">
+                <th scope="row" className="py-1 pr-3 text-left font-normal">
                   {row.name}
                 </th>
                 <td className="py-1 pr-3 text-right">{formatPercent(row.tax)}</td>
