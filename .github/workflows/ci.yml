@@ -14,7 +14,13 @@ jobs:
         with:
           node-version: '24'
           cache: npm
-      - run: npm ci
+      # npm ci ではなく npm install を使う。
+      # Next 16 と eslint-config-next が引きずる wasm32-wasi 向けの任意バイナリ
+      # （@napi-rs/wasm-runtime → @emnapi/runtime の alpha 版）は、
+      # インストール先のプラットフォームによって解決結果が変わり、
+      # ロックファイルに書き出せないため npm ci が同期エラーで落ちる。
+      # 該当のバイナリは実行時に読み込まれないので、install で差し支えない。
+      - run: npm install --no-audit --no-fund
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test

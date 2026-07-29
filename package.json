@@ -34,9 +34,5 @@
     "typescript": "^5",
     "vitest": "^4.1.10",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
-  },
-  "overrides": {
-    "@emnapi/core": "2.0.0-alpha.3",
-    "@emnapi/runtime": "2.0.0-alpha.3"
   }
 }
