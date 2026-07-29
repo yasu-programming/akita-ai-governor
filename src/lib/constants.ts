@@ -80,32 +80,3 @@ export const DEFAULT_WEIGHTS: Weights = {
 export const DISCRETIONARY_RATIO = 0.05;
 
 export const AKITA_CODE = '05';
-
-/**
- * 施策カードおよび UI 文言に含めてはならない語。
- * 実在の人物・政党・団体を想起させる表現を排除するため。
- */
-export const FORBIDDEN_WORDS: string[] = [
-  '知事選',
-  '選挙',
-  '候補者',
-  '投票',
-  '得票',
-  '公約',
-  '与党',
-  '野党',
-  '政党',
-  '自民',
-  '立憲',
-  '公明',
-  '維新',
-  '共産',
-  '国民民主',
-  '社民',
-  'れいわ',
-  '参政',
-  '首相',
-  '総理',
-  '大臣',
-  '議員',
-];

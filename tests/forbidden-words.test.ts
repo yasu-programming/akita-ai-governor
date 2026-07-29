@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import policies from '../src/data/policies.json';
-import { FORBIDDEN_WORDS } from '../src/lib/constants';
+import { FORBIDDEN_WORDS } from '../src/lib/forbidden-words';
 import type { Policy } from '../src/lib/types';
 
 const list = policies as Policy[];
