@@ -10,6 +10,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import { fiscalData } from '@/lib/fiscal';
 import { budgetShiftRows, formatOku } from '@/lib/sim-view';
 import type { PrefectureFiscal } from '@/lib/types';
 import { ChartTooltip } from './ChartTooltip';
@@ -45,6 +46,8 @@ export function BudgetShift({ prefecture, costByCategory }: Props) {
         </span>
         現状の目的別歳出（億円）に、採択された施策の想定コストを上乗せしたもの。
         歳出を抑える方向の施策にも実施コストがかかるため、上乗せは常にプラス側に出る。
+        「現状」は{fiscalData.meta.fiscalYear}決算の実数（出典：{fiscalData.meta.source}）です。
+        裁量枠 5% は本モデルの仮定値です。
       </figcaption>
 
       <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-xs text-neutral-700 dark:text-neutral-300">
@@ -66,7 +69,7 @@ export function BudgetShift({ prefecture, costByCategory }: Props) {
         </li>
       </ul>
 
-      <div className="mt-2 w-full" style={{ height: chartHeight }}>
+      <div className="mt-2 w-full" style={{ height: chartHeight }} aria-hidden="true">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}
@@ -124,9 +127,7 @@ export function BudgetShift({ prefecture, costByCategory }: Props) {
         </ResponsiveContainer>
       </div>
 
-      <p className="mt-2 text-xs text-neutral-600 dark:text-neutral-400">
-        単位は億円。裁量枠 5% は本モデルの仮定値です。
-      </p>
+      <p className="mt-2 text-xs text-neutral-600 dark:text-neutral-400">単位は億円。</p>
 
       <details className="mt-2">
         <summary className="cursor-pointer text-xs text-neutral-600 underline underline-offset-2 dark:text-neutral-400">

@@ -108,20 +108,22 @@ export function ResultPanel({
       </section>
 
       {/* 3. 切られた施策 */}
-      <section aria-labelledby="rejected-heading">
-        <h2 id="rejected-heading" className="text-xl font-semibold">
-          切られた施策（上位 {rejected.length} 件）
-        </h2>
-        <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
-          採択されなかった施策のうち、優先度の高い順に表示しています。理由は選定ロジックが
-          記録したものをそのまま示しています。
-        </p>
-        <div className="mt-3 space-y-3">
-          {rejected.map(({ policy, reason }) => (
-            <PolicyCard key={policy.id} policy={policy} note={rejectionReasonText(reason)} compact />
-          ))}
-        </div>
-      </section>
+      {rejected.length > 0 ? (
+        <section aria-labelledby="rejected-heading">
+          <h2 id="rejected-heading" className="text-xl font-semibold">
+            切られた施策（上位 {rejected.length} 件）
+          </h2>
+          <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+            採択されなかった施策のうち、優先度の高い順に表示しています。理由は選定ロジックが
+            記録したものをそのまま示しています。
+          </p>
+          <div className="mt-3 space-y-3">
+            {rejected.map(({ policy, reason }) => (
+              <PolicyCard key={policy.id} policy={policy} note={rejectionReasonText(reason)} compact />
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       {/* 4. 予算 */}
       <section aria-labelledby="budget-heading">
@@ -133,10 +135,7 @@ export function ResultPanel({
           <StatTile label="想定コスト合計" value={formatOku(result.totalCostOku)} unit="億円" />
           <StatTile
             label="裁量枠の使用率"
-            value={usage.toLocaleString('ja-JP', {
-              minimumFractionDigits: 1,
-              maximumFractionDigits: 1,
-            })}
+            value={Math.round(usage).toLocaleString('ja-JP')}
             unit="%"
           />
         </div>
@@ -148,7 +147,7 @@ export function ResultPanel({
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={Math.round(usage)}
-            aria-valuetext={`${usage.toFixed(1)}%`}
+            aria-valuetext={`${Math.round(usage)}%`}
             className="h-3 w-full overflow-hidden rounded-full"
             style={{ background: 'var(--viz-track)' }}
           >

@@ -56,8 +56,8 @@ export function ChartTooltip({ active, label, payload, format, hideZero = false 
         </p>
       )}
       <ul className="space-y-0.5">
-        {rows.map((row) => (
-          <li key={row.name} className="flex items-center gap-2">
+        {rows.map((row, index) => (
+          <li key={index} className="flex items-center gap-2">
             <span
               aria-hidden="true"
               className="inline-block h-0.5 w-3 rounded-full"

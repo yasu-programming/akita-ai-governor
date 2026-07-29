@@ -54,10 +54,16 @@ describe('却下理由 → 画面文言', () => {
     expect(Object.keys(REJECTION_REASON_TEXT).sort()).toEqual(['budget', 'exclusive', 'score']);
   });
 
-  it('実際のシミュレーション結果に出るすべての理由が文言化できる', () => {
+  it('実際のシミュレーション結果に出るすべての理由が、期待どおりの文言になる', () => {
+    const EXPECTED: Record<RejectedPolicy['reason'], string> = {
+      score: 'この価値観では優先度が立たない',
+      exclusive: '同じ目的でより優先度の高い施策を選んだため',
+      budget: '裁量枠を使い切ったため',
+    };
     const result = simulate(DEFAULT_WEIGHTS, POLICIES, budgetOku);
+    expect(result.rejected.length).toBeGreaterThan(0);
     for (const item of result.rejected) {
-      expect(rejectionReasonText(item.reason)).toBeTruthy();
+      expect(rejectionReasonText(item.reason)).toBe(EXPECTED[item.reason]);
     }
   });
 
@@ -142,6 +148,23 @@ describe('歳出の組み替え行', () => {
       expect(rows.every((r) => r.afterOku >= r.currentOku)).toBe(true);
     }
   });
+
+  it('区分の並び順は重み設定によらず一定（現状の歳出でソートし、シミュレーション結果で並べ替わらない）', () => {
+    const namedWeights: [string, Weights][] = [
+      ['DEFAULT_WEIGHTS', DEFAULT_WEIGHTS],
+      ...PRESETS.filter((p) =>
+        ['fiscal-discipline', 'quality-first', 'durability-first'].includes(p.id),
+      ).map((p): [string, Weights] => [p.id, p.weights]),
+    ];
+    const orders = namedWeights.map(([name, weights]) => {
+      const result = simulate(weights, POLICIES, budgetOku);
+      return { name, order: budgetShiftRows(akita, result.costByCategory).map((r) => r.category) };
+    });
+    const [first, ...rest] = orders;
+    for (const { name, order } of rest) {
+      expect(order, `${name} の並び順が ${first.name} と異なる`).toEqual(first.order);
+    }
+  });
 });
 
 describe('裁量枠の使用率', () => {
@@ -215,12 +238,21 @@ describe('施政方針文', () => {
     expect(statement.groups).toEqual([]);
   });
 
-  it('効果を断定する語を含めない', () => {
-    for (const preset of PRESETS) {
-      const result = simulate(preset.weights, POLICIES, budgetOku);
-      const statement = buildStatement(preset.weights, result.adopted);
+  it('画面に出す文言一式（lead と各 horizon グループの見出し・カード名）に効果を断定する語を含めない', () => {
+    const weightsSettings: Weights[] = [
+      DEFAULT_WEIGHTS,
+      ...PRESETS.map((p) => p.weights),
+      { population: 0, economy: 0, fiscal: 0, quality: 0, durability: 0 },
+    ];
+    for (const weights of weightsSettings) {
+      const result = simulate(weights, POLICIES, budgetOku);
+      const statement = buildStatement(weights, result.adopted);
+      const assembledText = [
+        statement.lead,
+        ...statement.groups.flatMap((g) => [g.label, ...g.names]),
+      ].join('\n');
       for (const word of ['予測', '改善します', '増加します', '達成します', '見込まれます']) {
-        expect(statement.lead).not.toContain(word);
+        expect(assembledText).not.toContain(word);
       }
     }
   });

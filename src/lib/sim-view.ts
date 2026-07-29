@@ -70,6 +70,10 @@ export type BudgetShiftRow = {
 /**
  * 現状の目的別歳出に、採択された施策の想定コストを上乗せした比較行を作る。
  * costByCategory 側にしか現れない区分があっても取りこぼさない。
+ *
+ * 並び順は currentOku（現状の歳出、重みに依存しない）の降順で固定する。
+ * afterOku で並べ替えると、重みを変えるたびに区分の順序が入れ替わり、
+ * カテゴリ軸が動いてしまう（チャートの棒が行ごと入れ替わって見える）ため使わない。
  */
 export function budgetShiftRows(
   p: PrefectureFiscal,
@@ -86,7 +90,7 @@ export function budgetShiftRows(
       const addedOku = costByCategory[category] ?? 0;
       return { category, currentOku, afterOku: currentOku + addedOku, addedOku };
     })
-    .sort((a, b) => b.afterOku - a.afterOku || a.category.localeCompare(b.category));
+    .sort((a, b) => b.currentOku - a.currentOku || a.category.localeCompare(b.category));
 }
 
 /* ------------------------------------------------------------------ */

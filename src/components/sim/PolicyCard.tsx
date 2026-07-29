@@ -1,4 +1,4 @@
-import { HORIZON_LABELS, formatOku, type Horizon } from '@/lib/sim-view';
+import { HORIZON_LABELS, formatOku } from '@/lib/sim-view';
 import type { Policy } from '@/lib/types';
 
 type Props = {
@@ -7,12 +7,6 @@ type Props = {
   note?: string;
   /** 見送りカード用の簡略表示 */
   compact?: boolean;
-};
-
-const HORIZON_HINT: Record<Horizon, string> = {
-  short: '効果が現れるまでの想定が短い',
-  medium: '効果が現れるまでの想定が中程度',
-  long: '効果が現れるまでの想定が長い',
 };
 
 /**
@@ -31,14 +25,11 @@ export function PolicyCard({ policy, note, compact = false }: Props) {
       }
     >
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <h4 className="text-base font-medium text-neutral-900 dark:text-neutral-100">
+        <h3 className="text-base font-medium text-neutral-900 dark:text-neutral-100">
           {policy.name}
-        </h4>
+        </h3>
         <div className="flex shrink-0 items-baseline gap-2 text-xs">
-          <span
-            className="rounded border border-neutral-300 px-1.5 py-0.5 text-neutral-600 dark:border-neutral-700 dark:text-neutral-400"
-            title={HORIZON_HINT[policy.horizon]}
-          >
+          <span className="rounded border border-neutral-300 px-1.5 py-0.5 text-neutral-600 dark:border-neutral-700 dark:text-neutral-400">
             {HORIZON_LABELS[policy.horizon]}
           </span>
           <span className="text-neutral-700 tabular-nums dark:text-neutral-300">
@@ -58,9 +49,9 @@ export function PolicyCard({ policy, note, compact = false }: Props) {
       {compact ? null : (
         <div className="mt-3 space-y-3 border-t border-neutral-200 pt-3 text-sm dark:border-neutral-800">
           <div>
-            <h5 className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">
+            <h4 className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">
               このカードが用意された理由
-            </h5>
+            </h4>
             <p className="mt-1 leading-relaxed text-neutral-700 dark:text-neutral-300">
               {policy.rationale}
             </p>
@@ -68,9 +59,9 @@ export function PolicyCard({ policy, note, compact = false }: Props) {
 
           {policy.sideEffects.length > 0 ? (
             <div>
-              <h5 className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">
+              <h4 className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">
                 留意点
-              </h5>
+              </h4>
               <ul className="mt-1 list-disc space-y-0.5 pl-5 text-neutral-700 dark:text-neutral-300">
                 {policy.sideEffects.map((s) => (
                   <li key={s}>{s}</li>
@@ -81,7 +72,7 @@ export function PolicyCard({ policy, note, compact = false }: Props) {
 
           {policy.evidence.length > 0 ? (
             <div>
-              <h5 className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">出典</h5>
+              <h4 className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">出典</h4>
               <ul className="mt-1 space-y-0.5">
                 {policy.evidence.map((e) => (
                   <li key={e.url}>

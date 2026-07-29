@@ -69,7 +69,11 @@ export function TradeoffChart({ effects }: Props) {
         </li>
       </ul>
 
-      <div className="mt-2 w-full" style={{ height: data.length * ROW_HEIGHT + 8 }}>
+      <div
+        className="mt-2 w-full"
+        style={{ height: data.length * ROW_HEIGHT + 8 }}
+        aria-hidden="true"
+      >
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}
