@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Governor Lab 秋田
 
-## Getting Started
+**本アプリは架空の AI モデルによる思考実験であり、現実の秋田県および県政、ならびに特定の個人・団体とは一切関係がありません。特定の政策を推奨・批判するものでもありません。**
 
-First, run the development server:
+5 つの価値観のつまみを動かすと、あらかじめ用意した施策カードの中から、その価値観のもとで選ばれる施策の組み合わせが機械的に導かれます。あわせて、47 都道府県の歳入・歳出構造と産業構造を公的統計で比較できます。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 何を見せるアプリか
+
+秋田県の歳出総額はおよそ 5,716 億円ですが、単年度で組み替えられる範囲はそのごく一部です。本アプリはその制約を 5%（約 286 億円）と置き、限られた枠の中で「何かを選ぶことは、別の何かを選ばないこと」であるさまを可視化します。
+
+価値観の軸は 5 つです。
+
+| 軸 | 副題 |
+|---|---|
+| 人口増加 | 社会増減・出生数を伸ばす |
+| 経済成長 | 県内総生産・所得を伸ばす |
+| 財政健全化 | 将来世代の負担を減らす |
+| 生活の質 | 医療・教育・安全を守る |
+| 政治的持続性 | 再選可能性をどれだけ重視するか |
+
+最後の軸は、公共選択論において政治家を「再選を目的関数に含む合理的主体」としてモデル化する枠組みに基づくものです。特定の人物の評価ではなく、制度設計を考えるための分析枠として扱っています。
+
+## 数値の扱い
+
+- **公的統計の実数** — 歳入・歳出の内訳、産業別県内総生産、人口、面積。出典は下記。
+- **本モデルの仮定値** — 施策のコスト、各軸へのスコア、裁量枠 5%、結果画面に出る指標の変化。
+
+この 2 つは画面上で区別して表示しています。指標の変化は将来の予測ではありません。
+
+## 仕組み
+
+実行時に外部 API も LLM も呼びません。施策カードの文面とスコアはあらかじめ人が作成したもので、アプリが機械的に行うのは選定と組み立てだけです。
+
+```
+score(カード) = Σ (重み[軸] / 100) × カード.scores[軸]
+  → スコア降順（同点はカード id の昇順）
+  → 同じ exclusiveGroup のカードが採択済みならスキップ
+  → 裁量枠を超えるカードはスキップし、より安いカードの走査を続ける
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+落選理由（スコア不足 / 同グループで負けた / 予算超過）はエンジンが返し、画面はそれを表示するだけです。歳出を抑える方向の施策も実施コストがかかるため、予算が戻り入れされることはありません。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 開発
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run dev           # 開発サーバー
+npm test              # Vitest
+npm run typecheck
+npm run lint
+npm run check:words   # 禁止語チェック
+npm run build         # 静的エクスポート（out/ に出力）
+```
 
-## Learn More
+Next.js の静的エクスポートのみを使い、サーバー側の処理は持ちません。
 
-To learn more about Next.js, take a look at the following resources:
+### データの更新
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+取り込みスクリプトは**手動実行専用**です。外部サイトへの依存をデプロイの経路から外すため、ビルド時には実行しません。生成された JSON はリポジトリにコミットします。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npx tsx scripts/fetch-fiscal.ts     # → src/data/fiscal.json
+npx tsx scripts/fetch-industry.ts   # → src/data/industry.json
+```
 
-## Deploy on Vercel
+## データ出典
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| データ | 出典 | 年度 |
+|---|---|---|
+| 歳入内訳・目的別歳出・性質別歳出・人口・面積 | 総務省「令和5年度都道府県財政指数表」第7章 都道府県別資料 | 令和5年度 |
+| 経済活動別県内総生産 | 内閣府 経済社会総合研究所「県民経済計算」主要系列表1 | 平成23〜令和4年度 |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+いずれも[政府標準利用規約（第2.0版）](https://www.digital.go.jp/resources/open_data/government-standard-terms-of-use_v2/)に基づき、出典を明記して利用しています。加工・整形は本アプリが行ったものであり、出典元が本アプリの内容を保証するものではありません。
+
+## ライセンス
+
+コードは MIT ライセンスです（[LICENSE](LICENSE)）。データの利用条件は上記の出典に従います。

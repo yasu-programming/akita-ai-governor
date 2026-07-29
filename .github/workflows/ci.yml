@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      # 実在の人物・政党・団体を想起させる語が UI 文言に混入していないか検査する。
+      # 混入したらビルドを失敗させる（表示されてからでは遅いため）。
+      - run: npm run check:words
+      - run: npm run build
