@@ -13,7 +13,7 @@ import {
 import { fiscalData } from '@/lib/fiscal';
 import { budgetShiftRows, formatOku } from '@/lib/sim-view';
 import type { PrefectureFiscal } from '@/lib/types';
-import { ChartTooltip } from './ChartTooltip';
+import { ChartTooltip } from '@/components/charts/ChartTooltip';
 
 type Props = {
   prefecture: PrefectureFiscal;

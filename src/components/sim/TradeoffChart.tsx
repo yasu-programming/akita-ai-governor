@@ -13,7 +13,7 @@ import {
 } from 'recharts';
 import { effectRows, formatSigned } from '@/lib/sim-view';
 import type { AxisKey } from '@/lib/types';
-import { ChartTooltip } from './ChartTooltip';
+import { ChartTooltip } from '@/components/charts/ChartTooltip';
 
 type Props = {
   effects: Record<AxisKey, number>;

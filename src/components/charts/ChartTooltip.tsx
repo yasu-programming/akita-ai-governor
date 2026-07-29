@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * チャート共通のホバー表示。
+ * チャート共通のホバー表示。/ と /data の両方で使う共有部品。
  *
  * dataviz の規約に合わせてある:
  *  - 値を主、系列名を従にする（読み手は系列を知っていて数値を知りたい）
@@ -16,6 +16,8 @@ export type ChartTooltipEntry = {
   value?: number | string | ReadonlyArray<number | string>;
   color?: string;
   fill?: string;
+  /** その行の元データ。散布図など label を持たないチャートで見出しに使う */
+  payload?: Record<string, unknown>;
 };
 
 type Props = {
@@ -26,10 +28,30 @@ type Props = {
   format: (value: number) => string;
   /** 値が 0 の行を出さない（正負で系列を分けたチャート用） */
   hideZero?: boolean;
+  /**
+   * 見出しを元データのこのキーから取る。
+   * 散布図（label を持たない）や、軸ラベルだけ短縮しているチャート
+   * （軸は短縮名、ホバーと表は正式名称）で使う。
+   */
+  labelKey?: string;
 };
 
-export function ChartTooltip({ active, label, payload, format, hideZero = false }: Props) {
+function headingOf(
+  label: string | number | undefined,
+  payload: ReadonlyArray<ChartTooltipEntry>,
+  labelKey?: string,
+): string | undefined {
+  if (labelKey) {
+    const raw = payload[0]?.payload?.[labelKey];
+    if (typeof raw === 'string' || typeof raw === 'number') return String(raw);
+  }
+  return label === undefined ? undefined : String(label);
+}
+
+export function ChartTooltip({ active, label, payload, format, hideZero = false, labelKey }: Props) {
   if (!active || !payload || payload.length === 0) return null;
+
+  const heading = headingOf(label, payload, labelKey);
 
   const rows = payload
     .map((entry) => ({
@@ -50,9 +72,9 @@ export function ChartTooltip({ active, label, payload, format, hideZero = false 
         color: 'var(--viz-ink)',
       }}
     >
-      {label === undefined ? null : (
+      {heading === undefined ? null : (
         <p className="mb-1 font-medium" style={{ color: 'var(--viz-ink-secondary)' }}>
-          {label}
+          {heading}
         </p>
       )}
       <ul className="space-y-0.5">

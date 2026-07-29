@@ -31,7 +31,9 @@ body {
  * チャートを含むツリーに .viz-root を付けると、以下の役割名で色が引ける。
  * ライト／ダークは CSS 側で切り替わるので、JS でテーマを判定しない。
  * 検証済みの値のみを使う（validate_palette.js で全チェック PASS）。
- *   カテゴリ 1=青 / 2=橙、正負の対比 青↔赤、面の色は本アプリの実際の背景色。
+ *   カテゴリ 1=青 / 2=橙 / 3=アクア、正負の対比 青↔赤、面の色は本アプリの実際の背景色。
+ *   --viz-deemph は「1 系列だけを強調し、残りを退かせる」表現で使う灰色。
+ *   系列色ではないので彩度の下限は適用されない（面に対して 3:1 以上は満たす）。
  * ------------------------------------------------------------------ */
 .viz-root {
   color-scheme: light;
@@ -43,6 +45,8 @@ body {
   --viz-axis: #c3c2b7;
   --viz-series-1: #2a78d6;
   --viz-series-2: #eb6834;
+  --viz-series-3: #1baf7a;
+  --viz-deemph: #898781;
   --viz-positive: #2a78d6;
   --viz-negative: #e34948;
   --viz-track: #cde2fb;
@@ -59,6 +63,8 @@ body {
     --viz-axis: #383835;
     --viz-series-1: #3987e5;
     --viz-series-2: #d95926;
+    --viz-series-3: #199e70;
+    --viz-deemph: #898781;
     --viz-positive: #3987e5;
     --viz-negative: #e66767;
     --viz-track: #184f95;
@@ -75,6 +81,8 @@ body {
   --viz-axis: #383835;
   --viz-series-1: #3987e5;
   --viz-series-2: #d95926;
+  --viz-series-3: #199e70;
+  --viz-deemph: #898781;
   --viz-positive: #3987e5;
   --viz-negative: #e66767;
   --viz-track: #184f95;
