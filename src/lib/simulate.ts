@@ -3,10 +3,20 @@ import { AXES } from './constants';
 
 export type ScoredPolicy = { policy: Policy; score: number };
 
+/**
+ * カードが採択されなかった理由。
+ * - 'score': 重み付けスコアが 0 以下で、その価値観では採る理由がない
+ * - 'exclusive': 同じ exclusiveGroup の先行カードが既に採択済み
+ * - 'budget': 採択すると単年度の裁量枠を超えるため見送った
+ */
+export type RejectionReason = 'score' | 'exclusive' | 'budget';
+
+export type RejectedPolicy = ScoredPolicy & { reason: RejectionReason };
+
 export type SimulationResult = {
   adopted: ScoredPolicy[];
-  /** 採択されなかったカードをスコア降順で返す */
-  rejected: ScoredPolicy[];
+  /** 採択されなかったカードをスコア降順で返す。各カードには却下理由 reason を付与する */
+  rejected: RejectedPolicy[];
   totalCostOku: number;
   /** 目的別歳出区分ごとの採択コスト合計（億円） */
   costByCategory: Record<string, number>;
@@ -27,6 +37,7 @@ function weightedScore(policy: Policy, weights: Weights): number {
  *
  * 決定論的であること（同じ入力から常に同じ出力）を保証する。乱数を使わず、
  * スコアが同点の場合は id の辞書順で決める。
+ * 採択されなかったカードには、なぜ採らなかったかの理由（reason）を添えて返す。
  *
  * @param weights  各軸 0〜100
  * @param policies 施策カードのプール
@@ -42,7 +53,7 @@ export function simulate(
     .sort((a, b) => b.score - a.score || a.policy.id.localeCompare(b.policy.id));
 
   const adopted: ScoredPolicy[] = [];
-  const rejected: ScoredPolicy[] = [];
+  const rejected: RejectedPolicy[] = [];
   const usedGroups = new Set<string>();
   let totalCostOku = 0;
 
@@ -52,15 +63,15 @@ export function simulate(
 
     // スコアが正でないカードは、その価値観では採る理由がない
     if (score <= 0) {
-      rejected.push(item);
+      rejected.push({ ...item, reason: 'score' });
       continue;
     }
     if (group && usedGroups.has(group)) {
-      rejected.push(item);
+      rejected.push({ ...item, reason: 'exclusive' });
       continue;
     }
     if (totalCostOku + policy.costOku > budgetOku) {
-      rejected.push(item);
+      rejected.push({ ...item, reason: 'budget' });
       continue;
     }
 

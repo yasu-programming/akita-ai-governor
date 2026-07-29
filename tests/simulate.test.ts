@@ -105,4 +105,47 @@ describe('simulate', () => {
     expect(r.adopted).toHaveLength(0);
     expect(r.totalCostOku).toBe(0);
   });
+
+  it('skips a high-scoring card that does not fit and adopts a cheaper lower-scoring one that does', () => {
+    const policies = [
+      card({ id: 'fits-expensive', costOku: 50, scores: { population: 9, economy: 0, fiscal: 0, quality: 0, durability: 0 } }),
+      card({ id: 'too-expensive', costOku: 60, scores: { population: 8, economy: 0, fiscal: 0, quality: 0, durability: 0 } }),
+      card({ id: 'cheap-fits', costOku: 10, scores: { population: 1, economy: 0, fiscal: 0, quality: 0, durability: 0 } }),
+    ];
+    const r = simulate(W({ population: 100 }), policies, 60);
+    expect(r.adopted.map((a) => a.policy.id)).toEqual(['fits-expensive', 'cheap-fits']);
+    const middle = r.rejected.find((x) => x.policy.id === 'too-expensive');
+    expect(middle?.reason).toBe('budget');
+    expect(r.totalCostOku).toBeLessThanOrEqual(60);
+  });
+
+  it('produces the same tie-broken adoption order across repeated runs', () => {
+    const policies = [
+      card({ id: 'c', scores: { population: 5, economy: 0, fiscal: 0, quality: 0, durability: 0 } }),
+      card({ id: 'a', scores: { population: 5, economy: 0, fiscal: 0, quality: 0, durability: 0 } }),
+      card({ id: 'e', scores: { population: 5, economy: 0, fiscal: 0, quality: 0, durability: 0 } }),
+      card({ id: 'b', scores: { population: 5, economy: 0, fiscal: 0, quality: 0, durability: 0 } }),
+      card({ id: 'd', scores: { population: 5, economy: 0, fiscal: 0, quality: 0, durability: 0 } }),
+    ];
+    const w = W({ population: 100 });
+    const expected = ['a', 'b', 'c', 'd', 'e'];
+    for (let i = 0; i < 20; i++) {
+      const r = simulate(w, policies, 1000);
+      expect(r.adopted.map((x) => x.policy.id)).toEqual(expected);
+    }
+  });
+
+  it('reports each of the three rejection reasons in the scenario that triggers it', () => {
+    const policies = [
+      card({ id: 'no-score', scores: { population: -5, economy: 0, fiscal: 0, quality: 0, durability: 0 } }),
+      card({ id: 'group-winner', exclusiveGroup: 'g', costOku: 5, scores: { population: 9, economy: 0, fiscal: 0, quality: 0, durability: 0 } }),
+      card({ id: 'group-loser', exclusiveGroup: 'g', costOku: 5, scores: { population: 4, economy: 0, fiscal: 0, quality: 0, durability: 0 } }),
+      card({ id: 'over-budget', costOku: 100, scores: { population: 6, economy: 0, fiscal: 0, quality: 0, durability: 0 } }),
+    ];
+    const r = simulate(W({ population: 100 }), policies, 10);
+    const byId = (id: string) => r.rejected.find((x) => x.policy.id === id);
+    expect(byId('no-score')?.reason).toBe('score');
+    expect(byId('group-loser')?.reason).toBe('exclusive');
+    expect(byId('over-budget')?.reason).toBe('budget');
+  });
 });
